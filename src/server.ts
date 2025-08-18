@@ -9,6 +9,7 @@ import session from 'express-session';
 import { connectDatabase } from './config/database';
 import passport from './config/passport';
 import authRoutes from './routes/auth';
+import discoverRoutes from './routes/discover';
 // import testAuthRoutes from './routes/test-auth'; // 제거
 
 const app = express();
@@ -57,6 +58,7 @@ app.use(passport.session());
 
 // 라우트 설정
 app.use('/auth', authRoutes);
+app.use('/discover', discoverRoutes);
 
 // 기본 라우트
 app.get('/', (req, res) => {
