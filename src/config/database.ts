@@ -2,7 +2,15 @@ import mongoose from 'mongoose';
 
 export const connectDatabase = async (): Promise<void> => {
   try {
-    const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/jokbo-breaker';
+    const envUriRaw = process.env.MONGODB_URI;
+    const envUri = envUriRaw && envUriRaw.trim().length > 0 ? envUriRaw.trim() : undefined;
+    const mongoUri = envUri || 'mongodb://localhost:27017/jokbo-breaker';
+
+    if (envUri) {
+      console.log('🔌 MongoDB: 환경변수 MONGODB_URI 사용 중');
+    } else {
+      console.warn('ℹ️ MongoDB: MONGODB_URI 미설정, 로컬 기본값으로 접속 시도');
+    }
 
     await mongoose.connect(mongoUri, {
       // 최신 MongoDB 드라이버에서 자동으로 처리되는 옵션들은 제거
