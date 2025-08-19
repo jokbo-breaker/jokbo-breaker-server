@@ -21,6 +21,7 @@ export type FoodCategory =
 export interface IMenu {
   store: Types.ObjectId;
   name: string;
+  description: string; // 메뉴 설명
   imageUrls: string[]; // 여러 이미지 지원
   stockLeft: number;
   originalPrice: number;
@@ -29,6 +30,8 @@ export interface IMenu {
   pickupStartTime: Date;
   pickupEndTime: Date;
   isDeliveryAvailable: boolean; // 기본적으로 store.supportsDelivery 상속 가능
+  deliveryStartTime?: Date; // 배달 시작 시간
+  deliveryPrice?: number; // 배달비 (배달 가능한 메뉴에만)
   foodTimeType?: FoodTimeType; // 아침/런치/디너
   category?: FoodCategory; // 카테고리(디저트/빵 등)
   createdAt: Date;

@@ -26,6 +26,10 @@ const createStoresAndMenus = async () => {
       lat: baseLat + (Math.random() - 0.5) * 0.02,
       lng: baseLng + (Math.random() - 0.5) * 0.02,
       supportsDelivery: Math.random() > 0.4,
+      address: `서울특별시 동작구 상도로 ${100 + i}길 ${randomInt(1, 50)}`,
+      phoneNumber: `02-${randomInt(100, 999)}-${randomInt(1000, 9999)}`,
+      openTime: (() => { const d = new Date(); d.setHours(8, 0, 0, 0); return d; })(),
+      closeTime: (() => { const d = new Date(); d.setHours(22, 0, 0, 0); return d; })(),
       tags: [],
     }))
   );
@@ -58,23 +62,34 @@ const createStoresAndMenus = async () => {
         // sweet 섹션 충족을 위해 일부는 카테고리를 빵/디저트로 지정
         const category = (si + mi) % 4 === 0 ? '디저트' : ((si + mi) % 7 === 0 ? '빵' : categories[(si + mi) % categories.length]);
 
-        return {
-            store: store._id,
-            name: `메뉴 ${si + 1}-${mi + 1}`,
-            imageUrls: [
-              `https://picsum.photos/seed/${si + 1}-${mi + 1}-1/400/300`,
-              `https://picsum.photos/seed/${si + 1}-${mi + 1}-2/400/300`,
-            ],
-            stockLeft: randomInt(0, 20),
-          originalPrice: original,
-          discountedPrice: discounted,
-          discountedPercentage: Math.round(100 - (discounted / original) * 100),
-          pickupStartTime: w.s,
-          pickupEndTime: w.e,
-          isDeliveryAvailable: (store as any).supportsDelivery && Math.random() > 0.3,
-          foodTimeType: ['breakfast','lunch','dinner'][(si + mi) % 3] as any,
-          category,
-        };
+                 const isDeliveryAvailable = (store as any).supportsDelivery && Math.random() > 0.3;
+         const deliveryPrice = isDeliveryAvailable ? randomInt(2000, 5000) : null;
+         const deliveryStart = isDeliveryAvailable ? (() => {
+           const d = new Date(w.s);
+           d.setMinutes(d.getMinutes() + 30); // 배달은 픽업보다 30분 늦게
+           return d;
+         })() : null;
+
+         return {
+           store: store._id,
+           name: `메뉴 ${si + 1}-${mi + 1}`,
+           description: `맛있는 ${category} 요리입니다. 신선한 재료로 만든 특별한 메뉴를 즐겨보세요.`,
+           imageUrls: [
+             `https://picsum.photos/seed/${si + 1}-${mi + 1}-1/400/300`,
+             `https://picsum.photos/seed/${si + 1}-${mi + 1}-2/400/300`,
+           ],
+           stockLeft: randomInt(0, 20),
+           originalPrice: original,
+           discountedPrice: discounted,
+           discountedPercentage: Math.round(100 - (discounted / original) * 100),
+           pickupStartTime: w.s,
+           pickupEndTime: w.e,
+           isDeliveryAvailable,
+           deliveryStartTime: deliveryStart,
+           deliveryPrice,
+           foodTimeType: ['breakfast','lunch','dinner'][(si + mi) % 3] as any,
+           category,
+         };
       });
       return arr;
     })

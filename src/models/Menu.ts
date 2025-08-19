@@ -5,6 +5,7 @@ const MenuSchema = new Schema<IMenuDocument>(
   {
     store: { type: Schema.Types.ObjectId, ref: 'Store', required: true, index: true },
     name: { type: String, required: true, trim: true },
+    description: { type: String, required: true, trim: true },
     imageUrls: { type: [String], default: [] },
     stockLeft: { type: Number, required: true, min: 0 },
     originalPrice: { type: Number, required: true, min: 0 },
@@ -13,6 +14,8 @@ const MenuSchema = new Schema<IMenuDocument>(
     pickupStartTime: { type: Date, required: true },
     pickupEndTime: { type: Date, required: true },
     isDeliveryAvailable: { type: Boolean, default: false, index: true },
+    deliveryStartTime: { type: Date, default: null },
+    deliveryPrice: { type: Number, default: null, min: 0 },
     foodTimeType: { type: String, enum: ['breakfast', 'lunch', 'dinner'], default: null },
     category: {
       type: String,

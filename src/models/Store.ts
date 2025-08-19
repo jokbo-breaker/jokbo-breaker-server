@@ -8,6 +8,10 @@ const StoreSchema = new Schema<IStoreDocument>(
     lat: { type: Number, required: true },
     lng: { type: Number, required: true },
     supportsDelivery: { type: Boolean, default: false, index: true },
+    address: { type: String, required: true, trim: true },
+    phoneNumber: { type: String, required: true, trim: true },
+    openTime: { type: Date, required: true },
+    closeTime: { type: Date, required: true },
     tags: { type: [String], default: [] },
   },
   {

@@ -75,6 +75,8 @@ router.post('/', async (req: Request, res: Response) => {
       pickUpStartTime: string;
       pickUpEndTime: string;
       storeDistance: number; // km 단위 (예: 1.8)
+      category: string | null; // 카테고리 (명확성을 위해)
+      supportsDelivery: boolean; // 배달 지원 여부 (명확성을 위해)
     };
 
     const toItem = (m: any): Item | null => {
@@ -104,6 +106,8 @@ router.post('/', async (req: Request, res: Response) => {
         pickUpStartTime: fmt(new Date(m.pickupStartTime)),
         pickUpEndTime: fmt(new Date(m.pickupEndTime)),
         storeDistance: dist,
+        category: m.category || null,
+        supportsDelivery: s.supportsDelivery,
       };
     };
 
@@ -172,6 +176,64 @@ router.post('/', async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error('❌ /discover 오류:', error);
+    return res.status(500).json({ success: false, message: '서버 오류가 발생했습니다.' });
+  }
+});
+
+/**
+ * @route   GET /discover/menu/:menuId
+ * @desc    메뉴 상세 정보 조회
+ * @access  Public
+ */
+router.get('/menu/:menuId', async (req: Request, res: Response) => {
+  try {
+    const { menuId } = req.params;
+
+    const menu = await Menu.findById(menuId).populate('store').lean();
+    if (!menu) {
+      return res.status(404).json({ success: false, message: '메뉴를 찾을 수 없습니다.' });
+    }
+
+    const store = menu.store as any;
+
+    const fmt = (d: Date) => {
+      const pad = (n: number) => String(n).padStart(2, '0');
+      const yyyy = d.getFullYear();
+      const MM = pad(d.getMonth() + 1);
+      const dd = pad(d.getDate());
+      const HH = pad(d.getHours());
+      const mm = pad(d.getMinutes());
+      const ss = pad(d.getSeconds());
+      return `${yyyy}${MM}${dd} ${HH}:${mm}:${ss}`;
+    };
+
+    const response = {
+      success: true,
+      storeId: String(store._id),
+      storeName: store.name,
+      storeOpenTime: fmt(new Date(store.openTime)),
+      storeCloseTime: fmt(new Date(store.closeTime)),
+      storeAddress: store.address,
+      storeLat: store.lat,
+      storeLng: store.lng,
+      storePhoneNumber: store.phoneNumber,
+      menuId: String(menu._id),
+      menuName: menu.name,
+      menuImageUrl: menu.imageUrls || [],
+      menuDescription: menu.description,
+      stockLeft: menu.stockLeft,
+      originalMenuPrice: menu.originalPrice,
+      discountedMenuPrice: menu.discountedPrice,
+      discountedPercentage: menu.discountedPercentage,
+      pickupPrice: menu.deliveryPrice || null, // 배달비 (있으면)
+      pickUpStartTime: fmt(new Date(menu.pickupStartTime)),
+      pickUpEndTime: fmt(new Date(menu.pickupEndTime)),
+      deliveryStartTime: menu.deliveryStartTime ? fmt(new Date(menu.deliveryStartTime)) : null,
+    };
+
+    return res.json(response);
+  } catch (error) {
+    console.error('❌ /discover/menu/:menuId 오류:', error);
     return res.status(500).json({ success: false, message: '서버 오류가 발생했습니다.' });
   }
 });
