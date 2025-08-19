@@ -5,7 +5,7 @@ const MenuSchema = new Schema<IMenuDocument>(
   {
     store: { type: Schema.Types.ObjectId, ref: 'Store', required: true, index: true },
     name: { type: String, required: true, trim: true },
-    imageUrl: { type: String, default: null },
+    imageUrls: { type: [String], default: [] },
     stockLeft: { type: Number, required: true, min: 0 },
     originalPrice: { type: Number, required: true, min: 0 },
     discountedPrice: { type: Number, required: true, min: 0 },

@@ -36,7 +36,7 @@ router.post('/', async (req: Request, res: Response) => {
     const type = parseType(req.query.type);
     const place = typeof req.query.place === 'string' ? req.query.place : undefined;
 
-    const limit = Math.max(1, Math.min(50, Number(req.query.limit) || 20));
+    // limit 제거 - 모든 해당 데이터 반환
 
     const storeQuery: any = {};
     if (place) {
@@ -67,14 +67,14 @@ router.post('/', async (req: Request, res: Response) => {
       storeName: string;
       menuId: string;
       menuName: string;
-      menuImageUrl: string | null;
+      menuImageUrls: string[];
       stockLeft: number;
       originalMenuPrice: number;
       discountedMenuPrice: number;
       discountedPercentage: number;
       pickUpStartTime: string;
       pickUpEndTime: string;
-      storeDistance: number;
+      storeDistance: number; // km 단위 (예: 1.8)
     };
 
     const toItem = (m: any): Item | null => {
@@ -96,7 +96,7 @@ router.post('/', async (req: Request, res: Response) => {
         storeName: s.name,
         menuId: String(m._id),
         menuName: m.name,
-        menuImageUrl: m.imageUrl || null,
+        menuImageUrls: m.imageUrls || [],
         stockLeft: m.stockLeft,
         originalMenuPrice: m.originalPrice,
         discountedMenuPrice: m.discountedPrice,
@@ -112,8 +112,7 @@ router.post('/', async (req: Request, res: Response) => {
 
     // nearBy: 거리순
     const nearBy = [...itemsAll]
-      .sort((a, b) => a.storeDistance - b.storeDistance)
-      .slice(0, limit);
+      .sort((a, b) => a.storeDistance - b.storeDistance);
 
     // brandNew: 최근 생성순(메뉴 생성일 기준)
     const brandNew = [...itemsAll]
@@ -121,14 +120,12 @@ router.post('/', async (req: Request, res: Response) => {
         const ma = menus.find(m => String(m._id) === a.menuId)!;
         const mb = menus.find(m => String(m._id) === b.menuId)!;
         return new Date(mb.createdAt).getTime() - new Date(ma.createdAt).getTime();
-      })
-      .slice(0, limit);
+      });
 
-    // lowInStock: stockLeft가 각 메뉴 기준 자체 임계값이 없다면 작은 값 순서(상위 limit)
+    // lowInStock: stockLeft가 작은 순서
     const lowInStock = [...itemsAll]
       .filter(x => x.stockLeft > 0)
-      .sort((a, b) => a.stockLeft - b.stockLeft)
-      .slice(0, limit);
+      .sort((a, b) => a.stockLeft - b.stockLeft);
 
     // mealTime: 현재 시간대가 아니면 빈 배열
     let mealTime: Item[] = [];
@@ -149,23 +146,20 @@ router.post('/', async (req: Request, res: Response) => {
           return (s <= end && e >= start); // 시간대와 교집합
         })
         .map(toItem)
-        .filter((v): v is Item => v !== null)
-        .slice(0, limit);
+        .filter((v): v is Item => v !== null);
     }
 
     // sweet: 카테고리 기준 '디저트' 또는 '빵'
     const sweet = menus
       .filter(m => m.category === '디저트' || m.category === '빵')
       .map(toItem)
-      .filter((v): v is Item => v !== null)
-      .slice(0, limit);
+      .filter((v): v is Item => v !== null);
 
     // pickUpRightNow: 지금 수령 가능 시간대이고 재고가 있는 메뉴
     const pickUpRightNow = menus
       .filter(m => m.stockLeft > 0 && isWithinTimeRange(now, new Date(m.pickupStartTime), new Date(m.pickupEndTime)))
       .map(toItem)
-      .filter((v): v is Item => v !== null)
-      .slice(0, limit);
+      .filter((v): v is Item => v !== null);
 
     return res.json({
       success: true,

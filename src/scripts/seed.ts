@@ -23,7 +23,7 @@ const createStoresAndMenus = async () => {
     Array.from({ length: 8 }).map((_, i) => ({
       name: `스토어 ${i + 1}`,
       place: places[i % places.length] || '동작구',
-      lag: baseLat + (Math.random() - 0.5) * 0.02,
+      lat: baseLat + (Math.random() - 0.5) * 0.02,
       lng: baseLng + (Math.random() - 0.5) * 0.02,
       supportsDelivery: Math.random() > 0.4,
       tags: [],
@@ -56,13 +56,16 @@ const createStoresAndMenus = async () => {
         const w = windows[(si + mi) % windows.length];
 
         // sweet 섹션 충족을 위해 일부는 카테고리를 빵/디저트로 지정
-        const category = (si + mi) % 4 === 0 ? '디저트' : ( (si + mi) % 7 === 0 ? '빵' : categories[(si + mi) % categories.length] );
+        const category = (si + mi) % 4 === 0 ? '디저트' : ((si + mi) % 7 === 0 ? '빵' : categories[(si + mi) % categories.length]);
 
         return {
-          store: store._id,
-          name: `메뉴 ${si + 1}-${mi + 1}`,
-          imageUrl: `https://picsum.photos/seed/${si + 1}-${mi + 1}/400/300`,
-          stockLeft: randomInt(0, 20),
+            store: store._id,
+            name: `메뉴 ${si + 1}-${mi + 1}`,
+            imageUrls: [
+              `https://picsum.photos/seed/${si + 1}-${mi + 1}-1/400/300`,
+              `https://picsum.photos/seed/${si + 1}-${mi + 1}-2/400/300`,
+            ],
+            stockLeft: randomInt(0, 20),
           originalPrice: original,
           discountedPrice: discounted,
           discountedPercentage: Math.round(100 - (discounted / original) * 100),

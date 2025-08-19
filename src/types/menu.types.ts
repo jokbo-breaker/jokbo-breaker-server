@@ -21,7 +21,7 @@ export type FoodCategory =
 export interface IMenu {
   store: Types.ObjectId;
   name: string;
-  imageUrl?: string;
+  imageUrls: string[]; // 여러 이미지 지원
   stockLeft: number;
   originalPrice: number;
   discountedPrice: number;
