@@ -16,7 +16,10 @@ const MenuSchema = new Schema<IMenuDocument>(
     isDeliveryAvailable: { type: Boolean, default: false, index: true },
     deliveryStartTime: { type: Date, default: null },
     deliveryPrice: { type: Number, default: null, min: 0 },
-    foodTimeType: { type: String, enum: ['breakfast', 'lunch', 'dinner'], default: null },
+    gramPerUnit: { type: Number, required: true, min: 0 }, // 메뉴 1개당 그램수
+    pickupPrice: { type: Number, required: true, min: 0 }, // 픽업시 금액 (배달비 제외)
+    totalSoldCount: { type: Number, default: 0, min: 0, index: true }, // 총 판매된 수량 (인기도 측정용)
+    foodTimeType: { type: String, enum: ['식사', '디저트'], default: null },
     category: {
       type: String,
       enum: [

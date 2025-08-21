@@ -77,6 +77,9 @@ router.post('/', async (req: Request, res: Response) => {
       storeDistance: number; // km 단위 (예: 1.8)
       category: string | null; // 카테고리 (명확성을 위해)
       supportsDelivery: boolean; // 배달 지원 여부 (명확성을 위해)
+      gramPerUnit: number; // 메뉴 1개당 그램수
+      pickupPrice: number; // 픽업시 금액
+      totalSoldCount: number; // 총 판매 수량 (인기도)
     };
 
     const toItem = (m: any): Item | null => {
@@ -108,6 +111,9 @@ router.post('/', async (req: Request, res: Response) => {
         storeDistance: dist,
         category: m.category || null,
         supportsDelivery: s.supportsDelivery,
+        gramPerUnit: m.gramPerUnit, // 메뉴 1개당 그램수
+        pickupPrice: m.pickupPrice, // 픽업시 금액
+        totalSoldCount: m.totalSoldCount, // 총 판매 수량 (인기도)
       };
     };
 
@@ -225,10 +231,15 @@ router.get('/menu/:menuId', async (req: Request, res: Response) => {
       originalMenuPrice: menu.originalPrice,
       discountedMenuPrice: menu.discountedPrice,
       discountedPercentage: menu.discountedPercentage,
-      pickupPrice: menu.deliveryPrice || null, // 배달비 (있으면)
+      gramPerUnit: menu.gramPerUnit, // 메뉴 1개당 그램수
+      pickupPrice: menu.pickupPrice, // 픽업시 금액
+      deliveryPrice: menu.deliveryPrice || null, // 배달비
+      totalSoldCount: menu.totalSoldCount, // 총 판매 수량
       pickUpStartTime: fmt(new Date(menu.pickupStartTime)),
       pickUpEndTime: fmt(new Date(menu.pickupEndTime)),
       deliveryStartTime: menu.deliveryStartTime ? fmt(new Date(menu.deliveryStartTime)) : null,
+      isDeliveryAvailable: menu.isDeliveryAvailable, // 배달 가능 여부
+      supportsDelivery: store.supportsDelivery, // 매장 배달 지원 여부
     };
 
     return res.json(response);

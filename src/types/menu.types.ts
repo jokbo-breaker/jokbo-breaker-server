@@ -1,6 +1,6 @@
 import { Document, Types } from 'mongoose';
 
-export type FoodTimeType = 'breakfast' | 'lunch' | 'dinner';
+export type FoodTimeType = '식사' | '디저트';
 
 export type FoodCategory =
   | '일식'
@@ -30,8 +30,11 @@ export interface IMenu {
   pickupStartTime: Date;
   pickupEndTime: Date;
   isDeliveryAvailable: boolean; // 기본적으로 store.supportsDelivery 상속 가능
-  deliveryStartTime?: Date; // 배달 시작 시간
+  deliveryStartTime?: Date; // 배달 시간
   deliveryPrice?: number; // 배달비 (배달 가능한 메뉴에만)
+  gramPerUnit: number; // 메뉴 1개당 그램수
+  pickupPrice: number; // 픽업시 금액 (배달비 제외)
+  totalSoldCount: number; // 총 판매된 수량 (인기도 측정용)
   foodTimeType?: FoodTimeType; // 아침/런치/디너
   category?: FoodCategory; // 카테고리(디저트/빵 등)
   createdAt: Date;
