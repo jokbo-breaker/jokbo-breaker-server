@@ -11,7 +11,49 @@ import passport from './config/passport';
 import indexRoutes from './routes/index';
 // import testAuthRoutes from './routes/test-auth'; // 제거
 
+// ====== server.ts 상단 app 선언 직후에 추가 ======
 const app = express();
+
+// 1) 프록시 신뢰(HTTPS 뒤에서도 secure 쿠키 동작)
+app.set('trust proxy', 1);
+
+// 2) 환경 플래그(프로덕션/크로스사이트 여부)
+const isProd = process.env.NODE_ENV === 'production';
+const crossSite = process.env.CROSS_SITE_COOKIES === 'true';
+
+// 3) 복수 오리진 허용(콤마 구분)
+const ORIGINS = (
+  process.env.ALLOWED_ORIGINS ||
+  process.env.CLIENT_URL ||                 // 하위 호환
+  'http://localhost:5173'
+).split(',').map(o => o.trim()).filter(Boolean);
+
+// ====== CORS 설정 교체 ======
+app.use(cors({
+  origin(origin, callback) {
+    // 서버-서버/로컬 툴링 등 origin이 없는 경우 허용
+    if (!origin) return callback(null, true);
+    if (ORIGINS.includes(origin)) return callback(null, true);
+    return callback(new Error(`CORS blocked: ${origin}`));
+  },
+  credentials: true,
+  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type','Authorization'],
+}));
+
+// ====== 세션 설정 교체 ======
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'dev-secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000,
+    secure: isProd,                       // 프로덕션(HTTPS)에서만 Secure
+    sameSite: crossSite ? 'none' : 'lax', // 크로스도메인 통신이면 none
+  },
+}));
+
 const PORT = process.env.PORT || 8000;
 
 // 데이터베이스 연결
@@ -29,34 +71,9 @@ app.use(helmet({
   },
 }));
 
-// 프록시 설정
-app.set('trust proxy', 1);
-
-const isProd = process.env.NODE_ENV === 'production';
-const crossSite = process.env.CROSS_SITE_COOKIES === 'true';
-
-// CORS 설정
-app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-}));
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
-
-app.use(session({
-  secret: process.env.SESSION_SECRET || 'dev-secret',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000,
-    secure: isProd,                   // 프로덕션 HTTPS에서만 Secure
-    sameSite: crossSite ? 'none' : 'lax', // 프론트-백엔드가 서로 다른 도메인이면 'none'
-  },
-}));
 
 
 // Passport 초기화
