@@ -28,10 +28,8 @@ export interface AuthResponse {
     id: string;
     email: string;
     name: string;
-    picture?: string;
     totalPurchaseCount: number;
     totalFoodAmount: number;
-    preferences: IUser['preferences'];
   };
   token?: string;
 }

@@ -70,10 +70,8 @@ router.get('/me', authenticateToken, async (req: Request, res: Response) => {
         id: (user._id as any).toString(),
         email: user.email,
         name: user.name,
-        picture: user.picture,
         totalPurchaseCount: user.totalPurchaseCount,
         totalFoodAmount: user.totalFoodAmount,
-        preferences: user.preferences,
       },
     };
 
@@ -131,10 +129,8 @@ router.put('/profile', authenticateToken, async (req: Request, res: Response) =>
         id: (user._id as any).toString(),
         email: user.email,
         name: user.name,
-        picture: user.picture,
         totalPurchaseCount: user.totalPurchaseCount,
         totalFoodAmount: user.totalFoodAmount,
-        preferences: user.preferences,
       },
     };
 
@@ -198,7 +194,6 @@ router.get('/status', async (req: Request, res: Response): Promise<void> => {
         id: (user._id as any).toString(),
         email: user.email,
         name: user.name,
-        picture: user.picture,
       },
     });
 

@@ -56,7 +56,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // 라우트 설정
-app.use('/', indexRoutes);
+app.use('/api', indexRoutes);
 
 // 기본 라우트는 이제 indexRoutes에서 처리됨
 
