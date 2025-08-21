@@ -29,6 +29,13 @@ app.use(helmet({
   },
 }));
 
+// 프록시 설정
+app.set('trust proxy', 1);
+
+const isProd = process.env.NODE_ENV === 'production';
+const crossSite = process.env.CROSS_SITE_COOKIES === 'true';
+
+// CORS 설정
 app.use(cors({
   origin: process.env.CLIENT_URL || 'http://localhost:3000',
   credentials: true,
@@ -39,17 +46,18 @@ app.use(cors({
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// 세션 설정
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'your-secret-key',
+  secret: process.env.SESSION_SECRET || 'dev-secret',
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: process.env.NODE_ENV === 'production',
     httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000, // 24시간
+    maxAge: 24 * 60 * 60 * 1000,
+    secure: isProd,                   // 프로덕션 HTTPS에서만 Secure
+    sameSite: crossSite ? 'none' : 'lax', // 프론트-백엔드가 서로 다른 도메인이면 'none'
   },
 }));
+
 
 // Passport 초기화
 app.use(passport.initialize());
