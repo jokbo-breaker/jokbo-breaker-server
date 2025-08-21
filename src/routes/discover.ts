@@ -249,4 +249,82 @@ router.get('/menu/:menuId', async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * @route   GET /discover/search
+ * @desc    메뉴명과 매장명에서 검색어가 포함된 결과 반환
+ * @access  Public
+ * @query   query (필수)
+ */
+router.get('/search', async (req: Request, res: Response) => {
+  try {
+    const { query } = req.query;
+
+    if (!query || typeof query !== 'string') {
+      return res.status(400).json({
+        success: false,
+        message: 'query 파라미터가 필요합니다.'
+      });
+    }
+
+    const searchText = query.trim();
+
+    // 매장명에서 검색어가 포함된 매장들을 찾음
+    const stores = await Store.find({
+      name: { $regex: searchText, $options: 'i' }
+    }).lean();
+    const storeIds = stores.map(s => s._id);
+
+    // 메뉴명 또는 해당 매장의 메뉴들을 찾음
+    const menus = await Menu.find({
+      $or: [
+        { name: { $regex: searchText, $options: 'i' } }, // 메뉴명에 검색어 포함
+        { store: { $in: storeIds } } // 매장명에 검색어가 포함된 매장의 모든 메뉴
+      ]
+    }).populate('store').lean();
+
+    const fmt = (d: Date) => {
+      const pad = (n: number) => String(n).padStart(2, '0');
+      const yyyy = d.getFullYear();
+      const MM = pad(d.getMonth() + 1);
+      const dd = pad(d.getDate());
+      const HH = pad(d.getHours());
+      const mm = pad(d.getMinutes());
+      const ss = pad(d.getSeconds());
+      return `${yyyy}${MM}${dd} ${HH}:${mm}:${ss}`;
+    };
+
+    const results = menus.map(menu => {
+      const store = menu.store as any;
+      return {
+        storeId: String(store._id),
+        storeName: store.name,
+        menuId: String(menu._id),
+        menuName: menu.name,
+        menuImageUrls: menu.imageUrls || [],
+        stockLeft: menu.stockLeft,
+        originalMenuPrice: menu.originalPrice,
+        discountedMenuPrice: menu.discountedPrice,
+        discountedPercentage: menu.discountedPercentage,
+        pickUpStartTime: fmt(new Date(menu.pickupStartTime)),
+        pickUpEndTime: fmt(new Date(menu.pickupEndTime)),
+        category: menu.category || null,
+        gramPerUnit: menu.gramPerUnit,
+        pickupPrice: menu.pickupPrice,
+        totalSoldCount: menu.totalSoldCount,
+      };
+    });
+
+    return res.json({
+      success: true,
+      query: searchText,
+      count: results.length,
+      results,
+    });
+
+  } catch (error) {
+    console.error('❌ /discover/search 오류:', error);
+    return res.status(500).json({ success: false, message: '서버 오류가 발생했습니다.' });
+  }
+});
+
 export default router;
