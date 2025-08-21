@@ -8,8 +8,7 @@ import helmet from 'helmet';
 import session from 'express-session';
 import { connectDatabase } from './config/database';
 import passport from './config/passport';
-import authRoutes from './routes/auth';
-import discoverRoutes from './routes/discover';
+import indexRoutes from './routes/index';
 // import testAuthRoutes from './routes/test-auth'; // 제거
 
 const app = express();
@@ -57,18 +56,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // 라우트 설정
-app.use('/auth', authRoutes);
-app.use('/discover', discoverRoutes);
+app.use('/', indexRoutes);
 
-// 기본 라우트
-app.get('/', (req, res) => {
-  res.json({
-    success: true,
-    message: '🍔 Jokbo Breaker API 서버가 실행중입니다!',
-    version: '1.0.0',
-    timestamp: new Date().toISOString(),
-  });
-});
+// 기본 라우트는 이제 indexRoutes에서 처리됨
 
 // 헬스체크 라우트
 app.get('/health', (req, res) => {
