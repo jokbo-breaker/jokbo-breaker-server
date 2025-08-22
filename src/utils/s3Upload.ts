@@ -13,7 +13,7 @@ const s3 = new AWS.S3({
 // Multer S3 설정
 export const uploadToS3 = multer({
   storage: multerS3({
-    s3: s3,
+    s3: s3 as any,
     bucket: process.env.S3_BUCKET_NAME || '',
     key: function (req, file, cb) {
       // 파일명을 타임스탬프와 함께 생성하여 중복 방지
@@ -29,7 +29,7 @@ export const uploadToS3 = multer({
     if (file.mimetype.startsWith('image/')) {
       cb(null, true);
     } else {
-      cb(new Error('이미지 파일만 업로드 가능합니다.'), false);
+      cb(null, false);
     }
   },
   limits: {

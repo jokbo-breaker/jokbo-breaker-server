@@ -16,6 +16,7 @@ export type FoodCategory =
   | '비건'
   | '할랄'
   | '인도 음식'
+  | '인도음식'
   | '직접입력';
 
 export interface IMenu {

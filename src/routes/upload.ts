@@ -19,7 +19,7 @@ router.post('/image', uploadToS3.single('image'), (req: Request, res: Response) 
 
     const file = req.file as Express.MulterS3.File;
 
-    res.json({
+    return res.json({
       success: true,
       message: '이미지 업로드 성공',
       data: {
@@ -30,7 +30,7 @@ router.post('/image', uploadToS3.single('image'), (req: Request, res: Response) 
     });
   } catch (error) {
     console.error('이미지 업로드 에러:', error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: '이미지 업로드 중 오류가 발생했습니다.'
     });
@@ -58,14 +58,14 @@ router.post('/images', uploadToS3.array('images', 10), (req: Request, res: Respo
       size: file.size
     }));
 
-    res.json({
+    return res.json({
       success: true,
       message: `${files.length}개 이미지 업로드 성공`,
       data: uploadedFiles
     });
   } catch (error) {
     console.error('이미지 업로드 에러:', error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: '이미지 업로드 중 오류가 발생했습니다.'
     });
@@ -90,13 +90,13 @@ router.delete('/image', async (req: Request, res: Response) => {
 
     await deleteFromS3(url);
 
-    res.json({
+    return res.json({
       success: true,
       message: '이미지 삭제 성공'
     });
   } catch (error) {
     console.error('이미지 삭제 에러:', error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: '이미지 삭제 중 오류가 발생했습니다.'
     });

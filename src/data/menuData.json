@@ -20,10 +20,10 @@
             "longitude": 126.9530402,
             "phoneNumber": "010-822-5988",
             "address": "서울특별시 동작구 상도동 490-6",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식1.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A84.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식1.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A84.jpg"
         ]
     },
     {
@@ -47,10 +47,11 @@
             "longitude": 126.953483,
             "phoneNumber": "010-814-3361",
             "address": "서울특별시 동작구 상도동 485",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/마루스시-디저트.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF1.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/마루스시-디저트.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF1.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF2.jpg"
         ]
     },
     {
@@ -74,10 +75,12 @@
             "longitude": 126.9532348,
             "phoneNumber": null,
             "address": "서울특별시 동작구 상도1동 490-5",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식-삼겹살.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식-삼겹살.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A83.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A82.jpg"
         ]
     },
     {
@@ -101,10 +104,10 @@
             "longitude": 126.9528127,
             "phoneNumber": null,
             "address": "서울특별시 상도1동 490",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식2.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A84.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식2.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A84.jpg"
         ]
     },
     {
@@ -128,10 +131,12 @@
             "longitude": 126.9535359,
             "phoneNumber": "010-821-3802",
             "address": "서울특별시 동작구 상도동 488-6",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식3.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식3.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A83.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A82.jpg"
         ]
     },
     {
@@ -155,10 +160,10 @@
             "longitude": 126.9595009,
             "phoneNumber": "010-828-7448",
             "address": "서울특별시 동작구 상도동 490-5",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/피자.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%91%E1%85%B5%E1%84%8C%E1%85%A1.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/피자.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%91%E1%85%B5%E1%84%8C%E1%85%A1.jpg"
         ]
     },
     {
@@ -182,11 +187,11 @@
             "longitude": 126.9537096,
             "phoneNumber": "010-822-2598",
             "address": "서울특별시 동작구 상도1동 485-1",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/해산물1.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF1.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/해산물1.jpg",
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/해산물2.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF1.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF2.jpg"
         ]
     },
     {
@@ -210,10 +215,11 @@
             "longitude": 126.9537525,
             "phoneNumber": null,
             "address": "서울특별시 동작구 상도동 485-1",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/해산물2.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF1.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/해산물2.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF1.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF2.jpg"
         ]
     },
     {
@@ -237,10 +243,11 @@
             "longitude": 126.9531818,
             "phoneNumber": "010-812-4260",
             "address": "서울특별시 상도동 490",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식4.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A84.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식4.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A84.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg"
         ]
     },
     {
@@ -264,10 +271,10 @@
             "longitude": 126.9550478,
             "phoneNumber": "010-816-5632",
             "address": "서울특별시 상도동 490-6",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/피자.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%91%E1%85%B5%E1%84%8C%E1%85%A1.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/피자.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%91%E1%85%B5%E1%84%8C%E1%85%A1.jpg"
         ]
     },
     {
@@ -291,10 +298,11 @@
             "longitude": 126.9531818,
             "phoneNumber": "010-826-6450",
             "address": "서울특별시 동작구 상도동 490",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식1.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A81.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식1.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A81.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A82.jpg"
         ]
     },
     {
@@ -318,10 +326,11 @@
             "longitude": 126.9531818,
             "phoneNumber": "010-814-1351",
             "address": "서울특별시 동작구 상도동 490",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식2.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A83.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식2.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A83.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A82.jpg"
         ]
     },
     {
@@ -345,10 +354,12 @@
             "longitude": 126.9531818,
             "phoneNumber": "010-824-7834",
             "address": "서울특별시 동작구 상도동 490",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식3.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식3.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A83.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A82.jpg"
         ]
     },
     {
@@ -399,10 +410,10 @@
             "longitude": 126.9531818,
             "phoneNumber": "010-812-4260",
             "address": "서울특별시 동작구 상도동 490",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/족발.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%8C%E1%85%A9%E1%86%A8%E1%84%87%E1%85%A1%E1%86%AF.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/족발.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%8C%E1%85%A9%E1%86%A8%E1%84%87%E1%85%A1%E1%86%AF.jpg"
         ]
     },
     {
@@ -426,10 +437,12 @@
             "longitude": 126.9531818,
             "phoneNumber": "010-822-7933",
             "address": "서울특별시 동작구 상도동 490",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식1.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식1.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A83.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A82.jpg"
         ]
     },
     {
@@ -453,10 +466,12 @@
             "longitude": 126.9531818,
             "phoneNumber": "010-824-7834",
             "address": "서울특별시 동작구 상도동 490",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식3.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식3.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A83.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A82.jpg"
         ]
     },
     {
@@ -480,10 +495,10 @@
             "longitude": 126.9550974,
             "phoneNumber": "010-812-7001",
             "address": "서울특별시 동작구 상도동 490-5",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식2.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A84.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식2.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A84.jpg"
         ]
     },
     {
@@ -507,10 +522,11 @@
             "longitude": 126.9531818,
             "phoneNumber": "010-826-6450",
             "address": "서울특별시 동작구 상도동 490",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식1.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A81.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식1.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A81.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A82.jpg"
         ]
     },
     {
@@ -534,10 +550,11 @@
             "longitude": 126.9531818,
             "phoneNumber": "010-814-1351",
             "address": "서울특별시 동작구 상도동 490",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식2.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A83.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식2.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A83.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A82.jpg"
         ]
     },
     {
@@ -588,10 +605,11 @@
             "longitude": 126.953483,
             "phoneNumber": "010-814-3361",
             "address": "서울특별시 동작구 상도동 485",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/마루스시-디저트.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF1.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/마루스시-디저트.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF1.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF2.jpg"
         ]
     },
     {
@@ -642,10 +660,10 @@
             "longitude": 126.9550478,
             "phoneNumber": "010-825-0410",
             "address": "서울특별시 동작구 상도동 490-6",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/중식-짜장면.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%8C%E1%85%AE%E1%86%BC%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%8D%E1%85%A1%E1%84%8C%E1%85%A1%E1%86%BC%E1%84%86%E1%85%A7%E1%86%AB.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/중식-짜장면.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%8C%E1%85%AE%E1%86%BC%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%8D%E1%85%A1%E1%84%8C%E1%85%A1%E1%86%BC%E1%84%86%E1%85%A7%E1%86%AB.jpg"
         ]
     },
     {
@@ -669,10 +687,10 @@
             "longitude": 126.9595009,
             "phoneNumber": "010-828-7448",
             "address": "서울특별시 동작구 상도동 490-5",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/투썸-디저트.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%90%E1%85%AE%E1%84%8A%E1%85%A5%E1%86%B7-%E1%84%83%E1%85%B5%E1%84%8C%E1%85%A5%E1%84%90%E1%85%B3.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/투썸-디저트.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%90%E1%85%AE%E1%84%8A%E1%85%A5%E1%86%B7-%E1%84%83%E1%85%B5%E1%84%8C%E1%85%A5%E1%84%90%E1%85%B3.jpg"
         ]
     },
     {
@@ -696,11 +714,11 @@
             "longitude": 126.9531818,
             "phoneNumber": "010-823-1234",
             "address": "서울특별시 동작구 상도동 490",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/고씨네-카레1.jpg"
+            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%80%E1%85%A9%E1%84%8A%E1%85%B5%E1%84%82%E1%85%A6-%E1%84%8F%E1%85%A1%E1%84%85%E1%85%A61.jpg"
         },
         "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/고씨네-카레1.jpg",
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/고씨네-카레2.jpg"
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%80%E1%85%A9%E1%84%8A%E1%85%B5%E1%84%82%E1%85%A6-%E1%84%8F%E1%85%A1%E1%84%85%E1%85%A61.jpg",
+            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%80%E1%85%A9%E1%84%8A%E1%85%B5%E1%84%82%E1%85%A6-%E1%84%8F%E1%85%A1%E1%84%85%E1%85%A62.jpg"
         ]
     }
 ]
