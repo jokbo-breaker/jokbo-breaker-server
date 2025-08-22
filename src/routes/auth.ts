@@ -11,9 +11,20 @@ const router = express.Router();
  * @desc    Google OAuth 로그인 시작
  * @access  Public
  */
-router.get('/google', passport.authenticate('google', {
-  scope: ['profile', 'email']
-}));
+// 변경: returnTo를 state로 전달해 콜백에서 로컬/배포 분기
+router.get('/google', (req, res, next) => {
+  const returnTo = (req.query.returnTo as string) || '';
+  let state: string | undefined;
+  if (returnTo) {
+    // 'local' 또는 허용된 절대 URL을 base64url로 인코딩하여 state로 전달
+    state = Buffer.from(returnTo).toString('base64url');
+  }
+
+  passport.authenticate('google', {
+    scope: ['profile', 'email'],
+    state,
+  })(req, res, next);
+});
 
 /**
  * @route   GET /auth/google/callback
@@ -43,10 +54,37 @@ router.get('/google/callback',
       console.log('📍 클라이언트 리다이렉트 준비...');
       console.log('=====================================');
 
-      // 성공 시 클라이언트로 토큰과 함께 리다이렉트
-      const clientUrl = process.env.CLIENT_URL || 'http://localhost:3000';
-      const redirectUrl = new URL('/auth/success', clientUrl); // ← 이게 이중 슬래시를 자동으로 정리
-      redirectUrl.searchParams.set('token', token);            // 쿼리 안전하게 추가
+      // --- 변경 시작: 동적 리다이렉트 대상 결정 ---
+      // 1) state 복원
+      const rawState = (req.query.state as string) || '';
+      let want = '';
+      try {
+        if (rawState) want = Buffer.from(rawState, 'base64url').toString('utf8');
+      } catch {}
+
+      // 2) 허용된 베이스(화이트리스트)
+      const allowedBases = [process.env.CLIENT_URL, process.env.CLIENT_URL_LOCAL]
+        .filter(Boolean) as string[];
+      const isAllowedBase = (url: string) => allowedBases.some(b => url.startsWith(b));
+
+      // 3) 기본은 배포 프론트
+      let base = process.env.CLIENT_URL || 'http://localhost:3000';
+
+      // 'local' 축약어 → CLIENT_URL_LOCAL 사용
+      if (want === 'local' && process.env.CLIENT_URL_LOCAL) {
+        base = process.env.CLIENT_URL_LOCAL;
+      }
+      // (옵션) 절대 URL을 넘겼다면 화이트리스트 내에서만 허용
+      else if (want && isAllowedBase(want)) {
+        base = want;
+      }
+
+      // 4) 안전한 URL 합성(이중 슬래시 방지) + token 부착
+      const redirectUrl = new URL('/auth/success', base);
+      redirectUrl.searchParams.set('token', token);
+      // --- 변경 끝 ---
+
+      // 성공 시 클라이언트로 리다이렉트
       res.redirect(redirectUrl.toString());
 
     } catch (error) {
@@ -98,8 +136,6 @@ router.post('/logout', authenticateToken, (req: Request, res: Response) => {
     message: '로그아웃 성공. 클라이언트에서 토큰을 삭제해주세요.',
   });
 });
-
-
 
 /**
  * @route   GET /auth/status
