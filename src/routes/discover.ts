@@ -1,11 +1,26 @@
 import express, { Request, Response } from 'express';
+import { IUserDocument } from '../types/user.types';
 import { Menu } from '../models/Menu';
 import { Store } from '../models/Store';
 import { haversineDistanceKm, formatKm } from '../utils/geo';
+import { authenticateToken } from '../middleware/auth';
+import {
+  analyzeUserPreferences,
+  getAIRecommendationScores,
+  filterMenusForRecommendation,
+  formatMenuRecommendation,
+  AIRecommendRequest,
+  MenuRecommendation
+} from '../utils/aiRecommendation';
 
 const router = express.Router();
 
 type DiscoverType = 'pickup' | 'delivery';
+
+// Request 인터페이스 확장
+interface AuthenticatedRequest extends Request {
+  user?: IUserDocument;
+}
 
 const parseType = (value: any): DiscoverType => {
   return value === 'delivery' ? 'delivery' : 'pickup';
@@ -591,6 +606,151 @@ router.post('/filter', async (req: Request, res: Response) => {
   } catch (error) {
     console.error('❌ /discover/filter 오류:', error);
     return res.status(500).json({ success: false, message: '서버 오류가 발생했습니다.' });
+  }
+});
+
+/**
+ * @route   POST /discover/ai-recommend
+ * @desc    ChatGPT AI를 활용한 개인화 메뉴 추천
+ * @access  Private (JWT 토큰 필요)
+ */
+router.post('/ai-recommend', authenticateToken, async (req: any, res: Response) => {
+  try {
+    const userId = req.user?._id;
+    if (!userId) {
+      return res.status(401).json({ success: false, message: '인증이 필요합니다.' });
+    }
+
+    const userIdString = String(userId);
+
+    const { categories, maxPrice, deliveryMethod, lat, lng, limit = 10 } = req.body;
+
+    // 필수 파라미터 검증
+    if (!categories || !maxPrice || !deliveryMethod || typeof lat !== 'number' || typeof lng !== 'number') {
+      return res.status(400).json({
+        success: false,
+        message: 'categories, maxPrice, deliveryMethod, lat, lng는 필수 항목입니다.',
+        required: {
+          categories: '카테고리 배열 (["일식", "한식"] 형태)',
+          maxPrice: '최대 가격 (숫자)',
+          deliveryMethod: '수령 방법 (all, delivery, pickup)',
+          lat: '위도 (숫자)',
+          lng: '경도 (숫자)',
+          limit: '추천 개수 (선택사항, 기본값: 10)'
+        }
+      });
+    }
+
+    // 카테고리 배열 유효성 검증
+    const validCategories = [
+      '일식','한식','중식','양식','빵','디저트','스페인 요리','멕시코 요리','패스트 푸드','건강식','비건','할랄','인도음식'
+    ];
+
+    if (!Array.isArray(categories) || categories.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'categories는 최소 하나 이상의 카테고리를 포함한 배열이어야 합니다.',
+        validCategories
+      });
+    }
+
+    const invalidCategories = categories.filter(cat => !validCategories.includes(cat));
+    if (invalidCategories.length > 0) {
+      return res.status(400).json({
+        success: false,
+        message: `유효하지 않은 카테고리가 포함되어 있습니다: ${invalidCategories.join(', ')}`,
+        validCategories
+      });
+    }
+
+    // 수령 방법 유효성 검증
+    if (!['all', 'delivery', 'pickup'].includes(deliveryMethod)) {
+      return res.status(400).json({
+        success: false,
+        message: '유효하지 않은 수령 방법입니다. 사용 가능한 값: all, delivery, pickup'
+      });
+    }
+
+    const request: AIRecommendRequest = {
+      categories,
+      maxPrice: Number(maxPrice),
+      deliveryMethod,
+      lat: Number(lat),
+      lng: Number(lng),
+      limit: Number(limit)
+    };
+
+    console.log(`🤖 AI 추천 시작 - 사용자: ${userIdString}, 카테고리: ${categories.join(', ')}, 최대가격: ${maxPrice}원`);
+
+    // 1. 사용자 선호도 분석
+    console.log('📊 사용자 주문 이력 분석 중...');
+    const userPreference = await analyzeUserPreferences(userIdString);
+
+    // 2. 조건에 맞는 메뉴 필터링
+    console.log('🔍 메뉴 필터링 중...');
+    const filteredMenus = await filterMenusForRecommendation(request);
+
+    if (filteredMenus.length === 0) {
+      return res.json({
+        success: true,
+        message: '조건에 맞는 메뉴가 없습니다.',
+        userProfile: {
+          favoriteCategories: userPreference.favoriteCategories,
+          avgOrderPrice: userPreference.avgOrderPrice,
+          totalOrders: userPreference.totalOrders
+        },
+        request,
+        recommendations: []
+      });
+    }
+
+    // 3. ChatGPT AI 점수 계산
+    console.log(`🤖 ChatGPT AI 분석 중... (${filteredMenus.length}개 메뉴)`);
+    const aiScores = await getAIRecommendationScores(filteredMenus, userPreference, request);
+
+    // 4. 점수 기반 정렬 및 포맷팅
+    const recommendations: MenuRecommendation[] = filteredMenus
+      .map(menu => {
+        const menuId = String(menu._id);
+        const scoreData = aiScores[menuId] || { score: 50, reason: '기본 추천' };
+        return formatMenuRecommendation(menu, scoreData.score, scoreData.reason);
+      })
+      .sort((a, b) => b.aiScore - a.aiScore) // AI 점수 내림차순
+      .slice(0, request.limit); // 요청한 개수만큼 제한
+
+    console.log(`✅ AI 추천 완료 - ${recommendations.length}개 추천`);
+
+    return res.json({
+      success: true,
+      message: `AI가 분석한 ${categories.join(', ')} 카테고리 추천 결과입니다.`,
+      userProfile: {
+        favoriteCategories: userPreference.favoriteCategories,
+        avgOrderPrice: userPreference.avgOrderPrice,
+        preferredOrderType: userPreference.preferredOrderType,
+        totalOrders: userPreference.totalOrders,
+        recentOrders: userPreference.recentOrders.slice(0, 3) // 최근 3개만 반환
+      },
+      request: {
+        categories: request.categories,
+        maxPrice: request.maxPrice,
+        deliveryMethod: request.deliveryMethod,
+        limit: request.limit
+      },
+      stats: {
+        totalFiltered: filteredMenus.length,
+        recommended: recommendations.length,
+        avgScore: Math.round(recommendations.reduce((sum, r) => sum + r.aiScore, 0) / recommendations.length) || 0
+      },
+      recommendations
+    });
+
+  } catch (error) {
+    console.error('❌ AI 추천 시스템 오류:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'AI 추천 시스템에 오류가 발생했습니다. 잠시 후 다시 시도해주세요.',
+      error: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.message : String(error)) : undefined
+    });
   }
 });
 
