@@ -14,10 +14,12 @@ export interface IOrderItem {
   totalGrams: number; // quantity * gramPerUnit
   // 메뉴 상세 정보 (주문내역 조회시 표시용)
   menuImageUrls?: string[]; // 메뉴 이미지들
-  originalMenuPrice?: number; // 원래 메뉴 가격
-  discountedMenuPrice?: number; // 할인된 메뉴 가격
+  originalMenuPrice?: number; // 원래 메뉴 가격 (할인 전 개당 가격)
+  originalTotalPrice?: number; // 할인 전 총 가격 (originalMenuPrice * quantity)
+  discountedMenuPrice?: number; // 할인된 메뉴 가격 (개당)
   discountedPercentage?: number; // 할인 퍼센트
-  pickupPrice?: number; // 픽업 가격 (픽업 주문일 때)
+  pickupPrice?: number; // 픽업 가격 (픽업 주문일 때만)
+  currentStockLeft?: number; // 현재 재고량 (조회 시점 기준)
 }
 
 export interface IOrder {
@@ -102,4 +104,15 @@ export interface OrderListResponse {
     orderDate: string;
   }>;
   totalCount: number;
+}
+
+export interface CancelOrderResponse {
+  success: boolean;
+  message: string;
+  cancelledOrder?: {
+    orderId: string;
+    storeName: string;
+    finalAmount: number;
+    cancelledAt: string;
+  };
 }

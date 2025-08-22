@@ -4,7 +4,7 @@ import { Menu } from '../models/Menu';
 import { Store } from '../models/Store';
 import { Order } from '../models/Order';
 import { User } from '../models/User';
-import { CreateOrderRequest, CreateOrderResponse, OrderListResponse } from '../types/order.types';
+import { CreateOrderRequest, CreateOrderResponse, OrderListResponse, CancelOrderResponse } from '../types/order.types';
 
 const router = express.Router();
 
@@ -226,13 +226,20 @@ router.get('/', authenticateToken, async (req: Request, res: Response): Promise<
         const itemsWithMenuInfo = await Promise.all(
           order.items.map(async (item) => {
             const menu = await Menu.findById(item.menuId).lean();
+            const originalMenuPrice = menu?.originalPrice || item.unitPrice;
+
             return {
               ...item,
               menuImageUrls: menu?.imageUrls || [],
-              originalMenuPrice: menu?.originalPrice || item.unitPrice,
+              originalMenuPrice,
+              originalTotalPrice: originalMenuPrice * item.quantity, // 할인 전 총 가격
               discountedMenuPrice: menu?.discountedPrice || item.unitPrice,
               discountedPercentage: menu?.discountedPercentage || 0,
-              pickupPrice: menu?.pickupPrice, // 픽업 가격 추가
+              // 픽업 주문일 때만 픽업 가격 포함
+              ...(order.orderType === 'pickup' ? {
+                pickupPrice: menu?.pickupPrice
+              } : {}),
+              currentStockLeft: menu?.stockLeft || 0, // 현재 재고량
             };
           })
         );
@@ -312,13 +319,20 @@ router.get('/:orderId', authenticateToken, async (req: Request, res: Response): 
     const itemsWithMenuInfo = await Promise.all(
       order.items.map(async (item) => {
         const menu = await Menu.findById(item.menuId).lean();
+        const originalMenuPrice = menu?.originalPrice || item.unitPrice;
+
         return {
           ...item,
           menuImageUrls: menu?.imageUrls || [],
-          originalMenuPrice: menu?.originalPrice || item.unitPrice,
+          originalMenuPrice,
+          originalTotalPrice: originalMenuPrice * item.quantity, // 할인 전 총 가격
           discountedMenuPrice: menu?.discountedPrice || item.unitPrice,
           discountedPercentage: menu?.discountedPercentage || 0,
-          pickupPrice: menu?.pickupPrice, // 픽업 가격 추가
+          // 픽업 주문일 때만 픽업 가격 포함
+          ...(order.orderType === 'pickup' ? {
+            pickupPrice: menu?.pickupPrice
+          } : {}),
+          currentStockLeft: menu?.stockLeft || 0, // 현재 재고량
         };
       })
     );
@@ -349,6 +363,134 @@ router.get('/:orderId', authenticateToken, async (req: Request, res: Response): 
     res.json(response);
   } catch (error) {
     console.error('❌ 주문 상세 조회 오류:', error);
+    res.status(500).json({
+      success: false,
+      message: '서버 오류가 발생했습니다.',
+    });
+  }
+});
+
+/**
+ * @route   DELETE /order/:orderId
+ * @desc    주문 취소 (주문 상태를 cancelled로 변경 + 재고/사용자 통계 롤백)
+ * @access  Private
+ */
+router.delete('/:orderId', authenticateToken, async (req: Request, res: Response): Promise<void> => {
+  try {
+    const user = (req as any).user;
+    const { orderId } = req.params;
+
+    // 주문 조회 (본인 주문인지 확인)
+    const order = await Order.findOne({
+      _id: orderId,
+      userId: user._id,
+    });
+
+    if (!order) {
+      res.status(404).json({
+        success: false,
+        message: '주문을 찾을 수 없습니다.',
+      });
+      return;
+    }
+
+    // 이미 취소된 주문인지 확인
+    if (order.status === 'cancelled') {
+      res.status(400).json({
+        success: false,
+        message: '이미 취소된 주문입니다.',
+      });
+      return;
+    }
+
+    // 완료된 주문은 취소 불가
+    if (order.status === 'completed') {
+      res.status(400).json({
+        success: false,
+        message: '완료된 주문은 취소할 수 없습니다.',
+      });
+      return;
+    }
+
+    console.log('🗑️ ===== 주문 취소 처리 시작 =====');
+    console.log('👤 사용자:', user.name);
+    console.log('📦 주문 ID:', orderId);
+    console.log('🏪 매장:', order.storeName);
+    console.log('💰 취소 금액:', order.finalAmount, '원');
+
+    // 트랜잭션으로 안전하게 처리
+    const session = await Order.startSession();
+    await session.withTransaction(async () => {
+      // 1. 주문 상태를 'cancelled'로 변경
+      await Order.findByIdAndUpdate(
+        orderId,
+        {
+          status: 'cancelled',
+          updatedAt: new Date(),
+        },
+        { session }
+      );
+
+      // 2. 각 메뉴의 재고 복구 및 판매량 차감
+      for (const item of order.items) {
+        await Menu.findByIdAndUpdate(
+          item.menuId,
+          {
+            $inc: {
+              stockLeft: item.quantity,        // 재고 복구
+              totalSoldCount: -item.quantity,  // 판매량 차감
+            }
+          },
+          { session }
+        );
+
+        console.log(`📦 메뉴 "${item.menuName}" 재고 복구: +${item.quantity}개`);
+      }
+
+      // 3. 사용자 통계 롤백
+      await User.findByIdAndUpdate(
+        user._id,
+        {
+          $inc: {
+            totalPurchaseCount: -1,              // 주문 횟수 차감
+            totalFoodAmount: -order.totalGrams,  // 음식량 차감
+          }
+        },
+        { session }
+      );
+
+      console.log(`👤 사용자 통계 롤백: 주문횟수 -1, 음식량 -${order.totalGrams}g`);
+    });
+
+    await session.endSession();
+
+    const fmt = (d: Date) => {
+      const pad = (n: number) => String(n).padStart(2, '0');
+      const yyyy = d.getFullYear();
+      const MM = pad(d.getMonth() + 1);
+      const dd = pad(d.getDate());
+      const HH = pad(d.getHours());
+      const mm = pad(d.getMinutes());
+      const ss = pad(d.getSeconds());
+      return `${yyyy}${MM}${dd} ${HH}:${mm}:${ss}`;
+    };
+
+    console.log('✅ ===== 주문 취소 완료 =====');
+
+    const response: CancelOrderResponse = {
+      success: true,
+      message: '주문이 성공적으로 취소되었습니다.',
+      cancelledOrder: {
+        orderId: orderId,
+        storeName: order.storeName,
+        finalAmount: order.finalAmount,
+        cancelledAt: fmt(new Date()),
+      },
+    };
+
+    res.json(response);
+  } catch (error) {
+    console.error('❌ 주문 취소 오류:', error);
     res.status(500).json({
       success: false,
       message: '서버 오류가 발생했습니다.',
