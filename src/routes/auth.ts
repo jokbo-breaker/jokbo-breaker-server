@@ -45,7 +45,9 @@ router.get('/google/callback',
 
       // 성공 시 클라이언트로 토큰과 함께 리다이렉트
       const clientUrl = process.env.CLIENT_URL || 'http://localhost:3000';
-      res.redirect(`${clientUrl}/auth/success?token=${token}`);
+      const redirectUrl = new URL('/auth/success', clientUrl); // ← 이게 이중 슬래시를 자동으로 정리
+      redirectUrl.searchParams.set('token', token);            // 쿼리 안전하게 추가
+      res.redirect(redirectUrl.toString());
 
     } catch (error) {
       console.error('❌ OAuth 콜백 오류:', error);
@@ -97,52 +99,7 @@ router.post('/logout', authenticateToken, (req: Request, res: Response) => {
   });
 });
 
-/**
- * @route   PUT /auth/profile
- * @desc    사용자 프로필 업데이트 (취향 정보 등)
- * @access  Private
- */
-router.put('/profile', authenticateToken, async (req: Request, res: Response) => {
-  try {
-    const user = (req as any).user;
-    const { preferences } = req.body;
 
-    if (preferences) {
-      // 취향 정보 업데이트
-      if (preferences.favoriteCategories) {
-        user.preferences.favoriteCategories = preferences.favoriteCategories;
-      }
-      if (preferences.allergens) {
-        user.preferences.allergens = preferences.allergens;
-      }
-      if (preferences.dietaryRestrictions) {
-        user.preferences.dietaryRestrictions = preferences.dietaryRestrictions;
-      }
-
-      await user.save();
-    }
-
-    const response: AuthResponse = {
-      success: true,
-      message: '프로필 업데이트 성공',
-      user: {
-        id: (user._id as any).toString(),
-        email: user.email,
-        name: user.name,
-        totalPurchaseCount: user.totalPurchaseCount,
-        totalFoodAmount: user.totalFoodAmount,
-      },
-    };
-
-    res.json(response);
-  } catch (error) {
-    console.error('❌ 프로필 업데이트 오류:', error);
-    res.status(500).json({
-      success: false,
-      message: '서버 오류가 발생했습니다.',
-    });
-  }
-});
 
 /**
  * @route   GET /auth/status
