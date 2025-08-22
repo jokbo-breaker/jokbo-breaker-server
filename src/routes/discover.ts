@@ -44,6 +44,8 @@ router.post('/', async (req: Request, res: Response) => {
     }
     if (type === 'delivery') {
       storeQuery.supportsDelivery = true;
+    } else if (type === 'pickup') {
+      storeQuery.supportsDelivery = false;
     }
 
     const stores = await Store.find(storeQuery).lean();
@@ -63,72 +65,54 @@ router.post('/', async (req: Request, res: Response) => {
     const currentMealWindow = isMealTimeWindow(now);
 
     type Item = {
-      storeId: string;
       storeName: string;
-      menuId: string;
       menuName: string;
       menuImageUrls: string[];
       stockLeft: number;
       originalMenuPrice: number;
       discountedMenuPrice: number;
       discountedPercentage: number;
-      pickUpStartTime: string;
-      pickUpEndTime: string;
-      storeDistance: number; // km 단위 (예: 1.8)
-      category: string | null; // 카테고리 (명확성을 위해)
-      supportsDelivery: boolean; // 배달 지원 여부 (명확성을 위해)
-      gramPerUnit: number; // 메뉴 1개당 그램수
-      pickupPrice: number; // 픽업시 금액
-      totalSoldCount: number; // 총 판매 수량 (인기도)
+      pickupPrice?: number; // pickup일 때만 포함
     };
 
     const toItem = (m: any): Item | null => {
       const s = storeMap.get(String(m.store));
       if (!s) return null;
-      const dist = formatKm(haversineDistanceKm(latInput, lngInput, s.lat, s.lng));
-      const fmt = (d: Date) => {
-        const pad = (n: number) => String(n).padStart(2, '0');
-        const yyyy = d.getFullYear();
-        const MM = pad(d.getMonth() + 1);
-        const dd = pad(d.getDate());
-        const HH = pad(d.getHours());
-        const mm = pad(d.getMinutes());
-        const ss = pad(d.getSeconds());
-        return `${yyyy}${MM}${dd} ${HH}:${mm}:${ss}`;
-      };
-      return {
-        storeId: String(s._id),
+
+      const item: Item = {
         storeName: s.name,
-        menuId: String(m._id),
         menuName: m.name,
         menuImageUrls: m.imageUrls || [],
         stockLeft: m.stockLeft,
         originalMenuPrice: m.originalPrice,
         discountedMenuPrice: m.discountedPrice,
         discountedPercentage: m.discountedPercentage,
-        pickUpStartTime: fmt(new Date(m.pickupStartTime)),
-        pickUpEndTime: fmt(new Date(m.pickupEndTime)),
-        storeDistance: dist,
-        category: m.category || null,
-        supportsDelivery: s.supportsDelivery,
-        gramPerUnit: m.gramPerUnit, // 메뉴 1개당 그램수
-        pickupPrice: m.pickupPrice, // 픽업시 금액
-        totalSoldCount: m.totalSoldCount, // 총 판매 수량 (인기도)
       };
+
+      // pickup 타입일 때만 pickupPrice 포함
+      if (type === 'pickup') {
+        item.pickupPrice = m.pickupPrice;
+      }
+
+      return item;
     };
 
     // 섹션 구성
     const itemsAll = menus.map(toItem).filter((v): v is Item => v !== null);
 
-    // nearBy: 거리순
+    // nearBy: 최신 등록 순서로 정렬 (거리 계산 제거)
     const nearBy = [...itemsAll]
-      .sort((a, b) => a.storeDistance - b.storeDistance);
+      .sort((a, b) => {
+        const ma = menus.find(m => m.name === a.menuName && storeMap.get(String(m.store))?.name === a.storeName)!;
+        const mb = menus.find(m => m.name === b.menuName && storeMap.get(String(m.store))?.name === b.storeName)!;
+        return new Date(mb.createdAt).getTime() - new Date(ma.createdAt).getTime();
+      });
 
     // brandNew: 최근 생성순(메뉴 생성일 기준)
     const brandNew = [...itemsAll]
       .sort((a, b) => {
-        const ma = menus.find(m => String(m._id) === a.menuId)!;
-        const mb = menus.find(m => String(m._id) === b.menuId)!;
+        const ma = menus.find(m => m.name === a.menuName && storeMap.get(String(m.store))?.name === a.storeName)!;
+        const mb = menus.find(m => m.name === b.menuName && storeMap.get(String(m.store))?.name === b.storeName)!;
         return new Date(mb.createdAt).getTime() - new Date(ma.createdAt).getTime();
       });
 

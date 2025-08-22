@@ -8,11 +8,6 @@ export interface IUser {
   picture?: string;
   totalPurchaseCount: number;
   totalFoodAmount: number;
-  preferences: {
-    favoriteCategories: string[];
-    allergens: string[];
-    dietaryRestrictions: string[];
-  };
   createdAt: Date;
   updatedAt: Date;
 }

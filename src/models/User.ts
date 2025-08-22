@@ -35,20 +35,6 @@ const UserSchema = new Schema<IUserDocument>(
       default: 0,
       min: 0,
     },
-    preferences: {
-      favoriteCategories: {
-        type: [String],
-        default: [],
-      },
-      allergens: {
-        type: [String],
-        default: [],
-      },
-      dietaryRestrictions: {
-        type: [String],
-        default: [],
-      },
-    },
   },
   {
     timestamps: true, // createdAt, updatedAt 자동 생성

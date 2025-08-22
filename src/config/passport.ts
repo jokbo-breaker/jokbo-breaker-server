@@ -48,11 +48,6 @@ if (!clientID || !clientSecret || !callbackURL) {
             picture: profile.photos?.[0]?.value,
             totalPurchaseCount: 0,
             totalFoodAmount: 0,
-            preferences: {
-              favoriteCategories: [],
-              allergens: [],
-              dietaryRestrictions: [],
-            },
           });
 
           return done(null, user);
