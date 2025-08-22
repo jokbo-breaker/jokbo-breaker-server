@@ -36,7 +36,7 @@ router.get('/', (req, res) => {
       },
       order: {
         'POST /api/order': '새 주문 생성 (인증 필요)',
-        'GET /api/order': '사용자 주문 내역 조회 (인증 필요)',
+        'GET /api/order': '사용자 주문 내역 조회 (인증 필요) - ?orderType=pickup|delivery로 필터링 가능',
         'GET /api/order/:orderId': '특정 주문 상세 정보 조회 (인증 필요)',
       },
       system: {

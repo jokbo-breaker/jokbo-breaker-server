@@ -193,13 +193,21 @@ router.get('/', authenticateToken, async (req: Request, res: Response): Promise<
     const limit = parseInt(req.query.limit as string) || 10;
     const skip = (page - 1) * limit;
 
-    const orders = await Order.find({ userId: user._id })
+    // orderType 필터링 (pickup, delivery, 또는 전체)
+    const orderType = req.query.orderType as string;
+    const filter: any = { userId: user._id };
+
+    if (orderType && (orderType === 'pickup' || orderType === 'delivery')) {
+      filter.orderType = orderType;
+    }
+
+    const orders = await Order.find(filter)
       .sort({ orderDate: -1 })
       .skip(skip)
       .limit(limit)
       .lean();
 
-    const totalCount = await Order.countDocuments({ userId: user._id });
+    const totalCount = await Order.countDocuments(filter);
 
     const fmt = (d: Date) => {
       const pad = (n: number) => String(n).padStart(2, '0');
@@ -212,22 +220,47 @@ router.get('/', authenticateToken, async (req: Request, res: Response): Promise<
       return `${yyyy}${MM}${dd} ${HH}:${mm}:${ss}`;
     };
 
+    // 각 주문의 메뉴 정보를 populate
+    const ordersWithMenuInfo = await Promise.all(
+      orders.map(async (order) => {
+        const itemsWithMenuInfo = await Promise.all(
+          order.items.map(async (item) => {
+            const menu = await Menu.findById(item.menuId).lean();
+            return {
+              ...item,
+              menuImageUrls: menu?.imageUrls || [],
+              originalMenuPrice: menu?.originalPrice || item.unitPrice,
+              discountedMenuPrice: menu?.discountedPrice || item.unitPrice,
+              discountedPercentage: menu?.discountedPercentage || 0,
+              pickupPrice: menu?.pickupPrice, // 픽업 가격 추가
+            };
+          })
+        );
+
+        return {
+          orderId: (order._id as any).toString(),
+          storeId: (order.storeId as any).toString(),
+          storeName: order.storeName,
+          items: itemsWithMenuInfo,
+          orderType: order.orderType,
+          paymentMethod: order.paymentMethod,
+          totalQuantity: order.totalQuantity,
+          totalAmount: order.totalAmount, // 순 주문 금액 (배달비 제외)
+          totalGrams: order.totalGrams,
+          ...(order.orderType === 'delivery' ? {
+            deliveryFee: order.deliveryFee, // 배달 주문일 때만 배달비 표시
+          } : {}),
+          finalAmount: order.finalAmount, // 최종 결제 금액
+          status: order.status,
+          orderDate: fmt(order.orderDate),
+        };
+      })
+    );
+
     const response: OrderListResponse = {
       success: true,
       message: '주문 내역 조회 성공',
-      orders: orders.map(order => ({
-        orderId: (order._id as any).toString(),
-        storeName: order.storeName,
-        items: order.items,
-        orderType: order.orderType,
-        paymentMethod: order.paymentMethod,
-        totalQuantity: order.totalQuantity,
-        totalAmount: order.totalAmount,
-        totalGrams: order.totalGrams,
-        finalAmount: order.finalAmount,
-        status: order.status,
-        orderDate: fmt(order.orderDate),
-      })),
+      orders: ordersWithMenuInfo,
       totalCount,
     };
 
@@ -275,13 +308,28 @@ router.get('/:orderId', authenticateToken, async (req: Request, res: Response): 
       return `${yyyy}${MM}${dd} ${HH}:${mm}:${ss}`;
     };
 
+    // 주문의 메뉴 정보를 populate
+    const itemsWithMenuInfo = await Promise.all(
+      order.items.map(async (item) => {
+        const menu = await Menu.findById(item.menuId).lean();
+        return {
+          ...item,
+          menuImageUrls: menu?.imageUrls || [],
+          originalMenuPrice: menu?.originalPrice || item.unitPrice,
+          discountedMenuPrice: menu?.discountedPrice || item.unitPrice,
+          discountedPercentage: menu?.discountedPercentage || 0,
+          pickupPrice: menu?.pickupPrice, // 픽업 가격 추가
+        };
+      })
+    );
+
     const response: CreateOrderResponse = {
       success: true,
       message: '주문 상세 정보 조회 성공',
       order: {
         orderId: (order._id as any).toString(),
         storeName: order.storeName,
-        items: order.items,
+        items: itemsWithMenuInfo,
         orderType: order.orderType,
         paymentMethod: order.paymentMethod,
         totalQuantity: order.totalQuantity,

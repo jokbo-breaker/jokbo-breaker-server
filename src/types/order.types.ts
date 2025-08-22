@@ -12,6 +12,12 @@ export interface IOrderItem {
   unitPrice: number; // 주문 당시의 단가 (픽업 또는 배달 가격)
   totalPrice: number; // quantity * unitPrice
   totalGrams: number; // quantity * gramPerUnit
+  // 메뉴 상세 정보 (주문내역 조회시 표시용)
+  menuImageUrls?: string[]; // 메뉴 이미지들
+  originalMenuPrice?: number; // 원래 메뉴 가격
+  discountedMenuPrice?: number; // 할인된 메뉴 가격
+  discountedPercentage?: number; // 할인 퍼센트
+  pickupPrice?: number; // 픽업 가격 (픽업 주문일 때)
 }
 
 export interface IOrder {
@@ -82,14 +88,16 @@ export interface OrderListResponse {
   message: string;
   orders: Array<{
     orderId: string;
+    storeId: string;
     storeName: string;
     items: IOrderItem[];
     orderType: OrderType;
     paymentMethod: PaymentMethod;
     totalQuantity: number;
-    totalAmount: number;
+    totalAmount: number; // 순 주문 금액 (배달비 제외)
     totalGrams: number;
-    finalAmount: number;
+    deliveryFee?: number; // 배달 주문일 때만 존재
+    finalAmount: number; // 최종 결제 금액 (totalAmount + deliveryFee)
     status: OrderStatus;
     orderDate: string;
   }>;
