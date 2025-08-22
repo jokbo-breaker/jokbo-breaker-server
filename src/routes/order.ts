@@ -21,9 +21,7 @@ router.post('/', authenticateToken, async (req: Request, res: Response): Promise
       quantity,
       orderType,
       paymentMethod,
-      specialRequests,
-      phoneNumber,
-      deliveryAddress
+      phoneNumber
     }: CreateOrderRequest = req.body;
 
     // 입력 검증
@@ -108,9 +106,7 @@ router.post('/', authenticateToken, async (req: Request, res: Response): Promise
       pickupStartTime: orderType === 'pickup' ? menu.pickupStartTime : null,
       pickupEndTime: orderType === 'pickup' ? menu.pickupEndTime : null,
       deliveryStartTime: orderType === 'delivery' ? menu.deliveryStartTime : null,
-      specialRequests: specialRequests || null,
       phoneNumber: phoneNumber || null,
-      deliveryAddress: deliveryAddress || null,
     };
 
     const order = new Order(orderData);
@@ -172,8 +168,6 @@ router.post('/', authenticateToken, async (req: Request, res: Response): Promise
         pickupEndTime: order.pickupEndTime ? fmt(order.pickupEndTime) : undefined,
         deliveryStartTime: order.deliveryStartTime ? fmt(order.deliveryStartTime) : undefined,
         phoneNumber: order.phoneNumber || undefined,
-        deliveryAddress: order.deliveryAddress || undefined,
-        specialRequests: order.specialRequests || undefined,
       },
     };
 
@@ -301,8 +295,6 @@ router.get('/:orderId', authenticateToken, async (req: Request, res: Response): 
         pickupEndTime: order.pickupEndTime ? fmt(order.pickupEndTime) : undefined,
         deliveryStartTime: order.deliveryStartTime ? fmt(order.deliveryStartTime) : undefined,
         phoneNumber: order.phoneNumber || undefined,
-        deliveryAddress: order.deliveryAddress || undefined,
-        specialRequests: order.specialRequests || undefined,
       },
     };
 

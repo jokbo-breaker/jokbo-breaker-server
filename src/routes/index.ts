@@ -30,6 +30,7 @@ router.get('/', (req, res) => {
         'POST /api/discover': '위치 기반 음식 탐색 (위도/경도 필수)',
         'GET /api/discover/menu/:menuId': '특정 메뉴 상세 정보 조회',
         'GET /api/discover/search': '통합 검색 (query 필수)',
+        'POST /api/discover/filter': '복합 필터링 검색 (모든 필터 선택사항)',
       },
       order: {
         'POST /api/order': '새 주문 생성 (인증 필요)',
@@ -46,8 +47,9 @@ router.get('/', (req, res) => {
       discoverFlow: 'POST /api/discover에 lat, lng 좌표를 전송하면 6개 섹션(nearBy, brandNew, lowInStock, mealTime, sweet, pickUpRightNow)으로 구성된 음식 목록 반환',
       discoverParams: '?type=pickup|delivery (기본값: pickup), ?place=장소명 (매장 검색)',
       searchParams: '?query=검색어 (메뉴명과 매장명에서 검색)',
+      filterParams: 'POST body: query(검색어), foodType(식사|디저트), category(카테고리), priceRange(가격대), deliveryMethod(배달|픽업|지금바로|나중에), sortBy(추천순|가격낮은순|가격높은순|할인율높은순|재고적은순)',
       orderFlow: '1. GET /api/discover/menu/:menuId로 메뉴 정보 확인 → 2. POST /api/order로 주문 생성 → 3. GET /api/order로 주문 내역 확인',
-      orderFields: 'menuId(필수), quantity(필수), orderType(pickup|delivery), paymentMethod(card|onsite), deliveryAddress(선택사항)',
+      orderFields: 'menuId(필수), quantity(필수), orderType(pickup|delivery), paymentMethod(card|onsite)',
     },
   });
 });

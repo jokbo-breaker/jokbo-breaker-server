@@ -37,9 +37,7 @@ export interface IOrder {
   deliveryStartTime?: Date; // 배달 시작 시간 (배달의 경우)
 
   // 추가 정보
-  specialRequests?: string; // 특별 요청사항
   phoneNumber?: string; // 연락처
-  deliveryAddress?: string; // 배달 주소 (선택사항, GPS 위도/경도로 대체 가능)
 
   createdAt: Date;
   updatedAt: Date;
@@ -53,9 +51,7 @@ export interface CreateOrderRequest {
   quantity: number;
   orderType: OrderType;
   paymentMethod: PaymentMethod;
-  specialRequests?: string;
   phoneNumber?: string;
-  deliveryAddress?: string; // 선택사항 (GPS로 대체 가능)
 }
 
 export interface CreateOrderResponse {
@@ -78,8 +74,6 @@ export interface CreateOrderResponse {
     pickupEndTime?: string;
     deliveryStartTime?: string;
     phoneNumber?: string;
-    deliveryAddress?: string;
-    specialRequests?: string;
   };
 }
 

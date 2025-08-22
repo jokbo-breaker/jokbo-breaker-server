@@ -1,6 +1,6 @@
 import { Document, Types } from 'mongoose';
 
-export type FoodTimeType = '식사' | '디저트';
+export type FoodType = '식사' | '디저트';
 
 export type FoodCategory =
   | '일식'
@@ -35,7 +35,7 @@ export interface IMenu {
   gramPerUnit: number; // 메뉴 1개당 그램수
   pickupPrice: number; // 픽업시 금액 (배달비 제외)
   totalSoldCount: number; // 총 판매된 수량 (인기도 측정용)
-  foodTimeType?: FoodTimeType; // 아침/런치/디너
+  foodType?: FoodType; // 식사/디저트
   category?: FoodCategory; // 카테고리(디저트/빵 등)
   createdAt: Date;
   updatedAt: Date;

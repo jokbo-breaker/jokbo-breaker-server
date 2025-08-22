@@ -225,7 +225,7 @@ router.get('/menu/:menuId', async (req: Request, res: Response) => {
       storePhoneNumber: store.phoneNumber,
       menuId: String(menu._id),
       menuName: menu.name,
-      menuImageUrl: menu.imageUrls || [],
+      menuImageUrls: menu.imageUrls || [],
       menuDescription: menu.description,
       stockLeft: menu.stockLeft,
       originalMenuPrice: menu.originalPrice,
@@ -307,7 +307,10 @@ router.get('/search', async (req: Request, res: Response) => {
         discountedPercentage: menu.discountedPercentage,
         pickUpStartTime: fmt(new Date(menu.pickupStartTime)),
         pickUpEndTime: fmt(new Date(menu.pickupEndTime)),
+        storeDistance: 0, // 검색에서는 거리 정보 없음
         category: menu.category || null,
+        foodType: menu.foodType || null,
+        supportsDelivery: store.supportsDelivery,
         gramPerUnit: menu.gramPerUnit,
         pickupPrice: menu.pickupPrice,
         totalSoldCount: menu.totalSoldCount,
@@ -323,6 +326,181 @@ router.get('/search', async (req: Request, res: Response) => {
 
   } catch (error) {
     console.error('❌ /discover/search 오류:', error);
+    return res.status(500).json({ success: false, message: '서버 오류가 발생했습니다.' });
+  }
+});
+
+/**
+ * @route   POST /discover/filter
+ * @desc    복합 필터링으로 메뉴 검색
+ * @access  Public
+ * @body    query, foodType, category, priceRange, deliveryMethod, sortBy
+ */
+router.post('/filter', async (req: Request, res: Response) => {
+  try {
+    const {
+      query,
+      foodType,
+      category,
+      priceRange,
+      deliveryMethod,
+      sortBy
+    } = req.body;
+
+    // 메뉴 검색 조건 구성
+    const menuQuery: any = {};
+
+    // 텍스트 검색 (선택사항)
+    if (query && typeof query === 'string') {
+      const searchText = query.trim();
+      // 매장명에서 검색어가 포함된 매장들을 찾음
+      const stores = await Store.find({
+        name: { $regex: searchText, $options: 'i' }
+      }).lean();
+      const storeIds = stores.map(s => s._id);
+
+      menuQuery.$or = [
+        { name: { $regex: searchText, $options: 'i' } }, // 메뉴명에 검색어 포함
+        { store: { $in: storeIds } } // 매장명에 검색어가 포함된 매장의 모든 메뉴
+      ];
+    }
+
+    // 음식 타입 필터
+    if (foodType && ['식사', '디저트'].includes(foodType)) {
+      menuQuery.foodType = foodType;
+    }
+
+    // 카테고리 필터
+    if (category && typeof category === 'string') {
+      menuQuery.category = category;
+    }
+
+    // 가격대 필터
+    if (priceRange && typeof priceRange === 'string') {
+      const priceRanges: { [key: string]: any } = {
+        '4000원 이하': { $lte: 4000 },
+        '6000원 이하': { $lte: 6000 },
+        '8000원 이하': { $lte: 8000 },
+        '10000원 이하': { $lte: 10000 },
+        '12000원 이하': { $lte: 12000 },
+        '12000원 이상': { $gte: 12000 }
+      };
+
+      if (priceRanges[priceRange]) {
+        menuQuery.discountedPrice = priceRanges[priceRange];
+      }
+    }
+
+    // 배달 필터 (deliveryMethod가 '배달'인 경우)
+    if (deliveryMethod === '배달') {
+      menuQuery.isDeliveryAvailable = true;
+    }
+
+    // 메뉴 검색 수행
+    const menus = await Menu.find(menuQuery).populate('store').lean();
+
+    const now = new Date();
+
+    // 수령방법 필터 적용 (지금바로/나중에)
+    let filteredMenus = menus;
+    if (deliveryMethod === '지금바로') {
+      filteredMenus = menus.filter(menu => {
+        const pickupStart = new Date(menu.pickupStartTime);
+        const pickupEnd = new Date(menu.pickupEndTime);
+        const isPickupNow = now >= pickupStart && now <= pickupEnd;
+
+        // 배달 가능한 메뉴의 경우 배달 시간도 확인
+        let isDeliveryNow = false;
+        if (menu.isDeliveryAvailable && menu.deliveryStartTime) {
+          const deliveryStart = new Date(menu.deliveryStartTime);
+          isDeliveryNow = now >= deliveryStart && now <= pickupEnd; // 픽업 종료시간까지
+        }
+
+        return isPickupNow || isDeliveryNow;
+      });
+    } else if (deliveryMethod === '나중에') {
+      filteredMenus = menus.filter(menu => {
+        const pickupStart = new Date(menu.pickupStartTime);
+        const pickupEnd = new Date(menu.pickupEndTime);
+        const isPickupNow = now >= pickupStart && now <= pickupEnd;
+
+        // 배달 가능한 메뉴의 경우 배달 시간도 확인
+        let isDeliveryNow = false;
+        if (menu.isDeliveryAvailable && menu.deliveryStartTime) {
+          const deliveryStart = new Date(menu.deliveryStartTime);
+          isDeliveryNow = now >= deliveryStart && now <= pickupEnd;
+        }
+
+        return !isPickupNow && !isDeliveryNow;
+      });
+    }
+
+    const fmt = (d: Date) => {
+      const pad = (n: number) => String(n).padStart(2, '0');
+      const yyyy = d.getFullYear();
+      const MM = pad(d.getMonth() + 1);
+      const dd = pad(d.getDate());
+      const HH = pad(d.getHours());
+      const mm = pad(d.getMinutes());
+      const ss = pad(d.getSeconds());
+      return `${yyyy}${MM}${dd} ${HH}:${mm}:${ss}`;
+    };
+
+    // 결과 변환
+    let results = filteredMenus.map(menu => {
+      const store = menu.store as any;
+      return {
+        storeId: String(store._id),
+        storeName: store.name,
+        menuId: String(menu._id),
+        menuName: menu.name,
+        menuImageUrls: menu.imageUrls || [],
+        stockLeft: menu.stockLeft,
+        originalMenuPrice: menu.originalPrice,
+        discountedMenuPrice: menu.discountedPrice,
+        discountedPercentage: menu.discountedPercentage,
+        pickUpStartTime: fmt(new Date(menu.pickupStartTime)),
+        pickUpEndTime: fmt(new Date(menu.pickupEndTime)),
+        storeDistance: 0,
+        category: menu.category || null,
+        foodType: menu.foodType || null,
+        supportsDelivery: store.supportsDelivery,
+        gramPerUnit: menu.gramPerUnit,
+        pickupPrice: menu.pickupPrice,
+        totalSoldCount: menu.totalSoldCount,
+      };
+    });
+
+    // 정렬 적용
+    if (sortBy === '추천순') {
+      results.sort((a, b) => b.totalSoldCount - a.totalSoldCount);
+    } else if (sortBy === '가격낮은순') {
+      results.sort((a, b) => a.discountedMenuPrice - b.discountedMenuPrice);
+    } else if (sortBy === '가격높은순') {
+      results.sort((a, b) => b.discountedMenuPrice - a.discountedMenuPrice);
+    } else if (sortBy === '할인율높은순') {
+      results.sort((a, b) => b.discountedPercentage - a.discountedPercentage);
+    } else if (sortBy === '재고적은순') {
+      results.sort((a, b) => a.stockLeft - b.stockLeft);
+    }
+    // 기본값은 정렬하지 않음
+
+    return res.json({
+      success: true,
+      filters: {
+        query: query || null,
+        foodType: foodType || null,
+        category: category || null,
+        priceRange: priceRange || null,
+        deliveryMethod: deliveryMethod || null,
+        sortBy: sortBy || null,
+      },
+      count: results.length,
+      results,
+    });
+
+  } catch (error) {
+    console.error('❌ /discover/filter 오류:', error);
     return res.status(500).json({ success: false, message: '서버 오류가 발생했습니다.' });
   }
 });

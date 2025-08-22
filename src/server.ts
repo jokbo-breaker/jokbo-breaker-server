@@ -9,6 +9,7 @@ import session from 'express-session';
 import { connectDatabase } from './config/database';
 import passport from './config/passport';
 import indexRoutes from './routes/index';
+import uploadRoutes from './routes/upload';
 // import testAuthRoutes from './routes/test-auth'; // 제거
 
 // ====== server.ts 상단 app 선언 직후에 추가 ======
@@ -82,6 +83,7 @@ app.use(passport.session());
 
 // 라우트 설정
 app.use('/api', indexRoutes);
+app.use('/api/upload', uploadRoutes);
 
 // 기본 라우트는 이제 indexRoutes에서 처리됨
 

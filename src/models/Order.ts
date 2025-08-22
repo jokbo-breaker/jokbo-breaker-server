@@ -50,9 +50,7 @@ const OrderSchema = new Schema<IOrderDocument>(
     deliveryStartTime: { type: Date, default: null },
 
     // 추가 정보
-    specialRequests: { type: String, trim: true, default: null },
     phoneNumber: { type: String, trim: true, default: null },
-    deliveryAddress: { type: String, trim: true, default: null },
   },
   {
     timestamps: true,

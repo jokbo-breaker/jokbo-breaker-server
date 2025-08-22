@@ -87,7 +87,7 @@ const createStoresAndMenus = async () => {
            isDeliveryAvailable,
            deliveryStartTime: deliveryStart,
            deliveryPrice,
-           foodTimeType: ['breakfast','lunch','dinner'][(si + mi) % 3] as any,
+           foodType: ['breakfast','lunch','dinner'][(si + mi) % 3] as any,
            category,
          };
       });
