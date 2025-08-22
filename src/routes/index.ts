@@ -28,6 +28,7 @@ router.get('/', (req, res) => {
       },
       discover: {
         'POST /api/discover': '위치 기반 음식 탐색 (위도/경도 필수)',
+        'GET /api/discover/store/:storeId/menus': '특정 스토어의 모든 메뉴 조회 (storeId 필수, lat/lng 선택사항)',
         'GET /api/discover/menu/:menuId': '특정 메뉴 상세 정보 조회',
         'GET /api/discover/search': '통합 검색 (query 필수)',
         'POST /api/discover/filter': '복합 필터링 검색 (모든 필터 선택사항)',

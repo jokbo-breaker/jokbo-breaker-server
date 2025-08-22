@@ -195,6 +195,80 @@ router.post('/', async (req: Request, res: Response) => {
 });
 
 /**
+ * @route   GET /discover/store/:storeId/menus
+ * @desc    특정 스토어의 모든 메뉴 조회
+ * @access  Public
+ */
+router.get('/store/:storeId/menus', async (req: Request, res: Response) => {
+  try {
+    const { storeId } = req.params;
+    const { lat, lng } = req.query;
+
+    // storeId로 스토어 정보 조회
+    const store = await Store.findById(storeId).lean();
+    if (!store) {
+      return res.status(404).json({ success: false, message: '스토어를 찾을 수 없습니다.' });
+    }
+
+    // 해당 스토어의 모든 메뉴 조회
+    const menus = await Menu.find({ store: storeId }).lean();
+
+    const fmt = (d: Date) => {
+      const pad = (n: number) => String(n).padStart(2, '0');
+      const yyyy = d.getFullYear();
+      const MM = pad(d.getMonth() + 1);
+      const dd = pad(d.getDate());
+      const HH = pad(d.getHours());
+      const mm = pad(d.getMinutes());
+      const ss = pad(d.getSeconds());
+      return `${yyyy}${MM}${dd} ${HH}:${mm}:${ss}`;
+    };
+
+    // 거리 계산 (위도/경도가 제공된 경우)
+    let storeDistance = 0;
+    if (lat && lng && typeof lat === 'string' && typeof lng === 'string') {
+      const latNum = parseFloat(lat);
+      const lngNum = parseFloat(lng);
+      if (!isNaN(latNum) && !isNaN(lngNum)) {
+        storeDistance = formatKm(haversineDistanceKm(latNum, lngNum, store.lat, store.lng));
+      }
+    }
+
+    // 메뉴 정보 변환
+    const menuItems = menus.map(menu => ({
+      storeId: String(store._id),
+      storeName: store.name,
+      menuId: String(menu._id),
+      menuName: menu.name,
+      menuImageUrls: menu.imageUrls || [],
+      stockLeft: menu.stockLeft,
+      originalMenuPrice: menu.originalPrice,
+      discountedMenuPrice: menu.discountedPrice,
+      discountedPercentage: menu.discountedPercentage,
+      pickUpStartTime: fmt(new Date(menu.pickupStartTime)),
+      pickUpEndTime: fmt(new Date(menu.pickupEndTime)),
+      storeDistance: storeDistance,
+      pickupPrice: menu.pickupPrice,
+    }));
+
+    return res.json({
+      success: true,
+      storeId: String(store._id),
+      storeName: store.name,
+      storeAddress: store.address,
+      storePhoneNumber: store.phoneNumber,
+      storeDistance: storeDistance,
+      totalMenus: menuItems.length,
+      menus: menuItems,
+    });
+
+  } catch (error) {
+    console.error('❌ /discover/store/:storeId/menus 오류:', error);
+    return res.status(500).json({ success: false, message: '서버 오류가 발생했습니다.' });
+  }
+});
+
+/**
  * @route   GET /discover/menu/:menuId
  * @desc    메뉴 상세 정보 조회
  * @access  Public
@@ -342,7 +416,7 @@ router.get('/search', async (req: Request, res: Response) => {
  * @route   POST /discover/filter
  * @desc    복합 필터링으로 메뉴 검색
  * @access  Public
- * @body    query, foodType, category, priceRange, deliveryMethod, sortBy
+ * @body    query, foodType, category, priceRange, deliveryMethod, sortBy, lat, lng
  */
 router.post('/filter', async (req: Request, res: Response) => {
   try {
@@ -352,7 +426,9 @@ router.post('/filter', async (req: Request, res: Response) => {
       category,
       priceRange,
       deliveryMethod,
-      sortBy
+      sortBy,
+      lat,
+      lng
     } = req.body;
 
     // 메뉴 검색 조건 구성
@@ -386,12 +462,12 @@ router.post('/filter', async (req: Request, res: Response) => {
     // 가격대 필터
     if (priceRange && typeof priceRange === 'string') {
       const priceRanges: { [key: string]: any } = {
-        '4000원 이하': { $lte: 4000 },
-        '6000원 이하': { $lte: 6000 },
-        '8000원 이하': { $lte: 8000 },
-        '10000원 이하': { $lte: 10000 },
-        '12000원 이하': { $lte: 12000 },
-        '12000원 이상': { $gte: 12000 }
+        '4,000원 이하': { $lte: 4000 },
+        '6,000원 이하': { $lte: 6000 },
+        '8,000원 이하': { $lte: 8000 },
+        '10,000원 이하': { $lte: 10000 },
+        '12,000원 이하': { $lte: 12000 },
+        '12,000원 이상': { $gte: 12000 }
       };
 
       if (priceRanges[priceRange]) {
@@ -457,6 +533,13 @@ router.post('/filter', async (req: Request, res: Response) => {
     // 결과 변환
     let results = filteredMenus.map(menu => {
       const store = menu.store as any;
+
+      // 거리 계산 (좌표가 있는 경우에만)
+      let storeDistance = 0;
+      if (lat && lng && typeof lat === 'number' && typeof lng === 'number') {
+        storeDistance = formatKm(haversineDistanceKm(lat, lng, store.lat, store.lng));
+      }
+
       return {
         storeId: String(store._id),
         storeName: store.name,
@@ -469,7 +552,7 @@ router.post('/filter', async (req: Request, res: Response) => {
         discountedPercentage: menu.discountedPercentage,
         pickUpStartTime: fmt(new Date(menu.pickupStartTime)),
         pickUpEndTime: fmt(new Date(menu.pickupEndTime)),
-        storeDistance: 0,
+        storeDistance,
         category: menu.category || null,
         foodType: menu.foodType || null,
         supportsDelivery: store.supportsDelivery,
@@ -480,16 +563,14 @@ router.post('/filter', async (req: Request, res: Response) => {
     });
 
     // 정렬 적용
-    if (sortBy === '추천순') {
+    if (sortBy === '인기순') {
       results.sort((a, b) => b.totalSoldCount - a.totalSoldCount);
     } else if (sortBy === '가격낮은순') {
       results.sort((a, b) => a.discountedMenuPrice - b.discountedMenuPrice);
     } else if (sortBy === '가격높은순') {
       results.sort((a, b) => b.discountedMenuPrice - a.discountedMenuPrice);
-    } else if (sortBy === '할인율높은순') {
-      results.sort((a, b) => b.discountedPercentage - a.discountedPercentage);
-    } else if (sortBy === '재고적은순') {
-      results.sort((a, b) => a.stockLeft - b.stockLeft);
+    } else if (sortBy === '거리순') {
+      results.sort((a, b) => a.storeDistance - b.storeDistance);
     }
     // 기본값은 정렬하지 않음
 
