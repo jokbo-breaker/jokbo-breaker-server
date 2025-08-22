@@ -42,19 +42,21 @@ router.post('/', async (req: Request, res: Response) => {
     if (place) {
       storeQuery.place = { $regex: place, $options: 'i' };
     }
+    // delivery 타입일 때만 배달 지원 매장으로 제한
     if (type === 'delivery') {
       storeQuery.supportsDelivery = true;
-    } else if (type === 'pickup') {
-      storeQuery.supportsDelivery = false;
     }
+    // pickup 타입일 때는 모든 매장 포함 (배달 지원 여부 상관없음)
 
     const stores = await Store.find(storeQuery).lean();
     const storeIds = stores.map(s => s._id);
 
     const menuQuery: any = { store: { $in: storeIds } };
+    // delivery 타입일 때만 배달 가능한 메뉴로 제한
     if (type === 'delivery') {
       menuQuery.isDeliveryAvailable = true;
     }
+    // pickup 타입일 때는 모든 메뉴 포함 (배달 가능 여부 상관없음)
 
     const menus = await Menu.find(menuQuery).lean();
 
@@ -65,7 +67,9 @@ router.post('/', async (req: Request, res: Response) => {
     const currentMealWindow = isMealTimeWindow(now);
 
     type Item = {
+      storeId: string;
       storeName: string;
+      menuId: string;
       menuName: string;
       menuImageUrls: string[];
       stockLeft: number;
@@ -75,12 +79,14 @@ router.post('/', async (req: Request, res: Response) => {
       pickupPrice?: number; // pickup일 때만 포함
     };
 
-    const toItem = (m: any): Item | null => {
+        const toItem = (m: any): Item | null => {
       const s = storeMap.get(String(m.store));
       if (!s) return null;
 
       const item: Item = {
+        storeId: String(s._id),
         storeName: s.name,
+        menuId: String(m._id),
         menuName: m.name,
         menuImageUrls: m.imageUrls || [],
         stockLeft: m.stockLeft,
@@ -103,16 +109,16 @@ router.post('/', async (req: Request, res: Response) => {
     // nearBy: 최신 등록 순서로 정렬 (거리 계산 제거)
     const nearBy = [...itemsAll]
       .sort((a, b) => {
-        const ma = menus.find(m => m.name === a.menuName && storeMap.get(String(m.store))?.name === a.storeName)!;
-        const mb = menus.find(m => m.name === b.menuName && storeMap.get(String(m.store))?.name === b.storeName)!;
+        const ma = menus.find(m => String(m._id) === a.menuId)!;
+        const mb = menus.find(m => String(m._id) === b.menuId)!;
         return new Date(mb.createdAt).getTime() - new Date(ma.createdAt).getTime();
       });
 
     // brandNew: 최근 생성순(메뉴 생성일 기준)
     const brandNew = [...itemsAll]
       .sort((a, b) => {
-        const ma = menus.find(m => m.name === a.menuName && storeMap.get(String(m.store))?.name === a.storeName)!;
-        const mb = menus.find(m => m.name === b.menuName && storeMap.get(String(m.store))?.name === b.storeName)!;
+        const ma = menus.find(m => String(m._id) === a.menuId)!;
+        const mb = menus.find(m => String(m._id) === b.menuId)!;
         return new Date(mb.createdAt).getTime() - new Date(ma.createdAt).getTime();
       });
 
