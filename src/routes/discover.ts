@@ -429,9 +429,9 @@ router.get('/search', async (req: Request, res: Response) => {
 
 /**
  * @route   POST /discover/filter
- * @desc    복합 필터링으로 메뉴 검색
+ * @desc    메뉴 기준 필터링 및 정렬 - 결과는 매장 정보와 함께 반환
  * @access  Public
- * @body    query, foodType, category, priceRange, deliveryMethod, sortBy, lat, lng
+ * @body    query, foodType, category, priceRange, deliveryMethod, sortBy, includeOutOfStock, lat, lng
  */
 router.post('/filter', async (req: Request, res: Response) => {
   try {
@@ -442,9 +442,22 @@ router.post('/filter', async (req: Request, res: Response) => {
       priceRange,
       deliveryMethod,
       sortBy,
+      includeOutOfStock = false,
       lat,
       lng
     } = req.body;
+
+    // 위도, 경도 필수 체크
+    if (typeof lat !== 'number' || typeof lng !== 'number') {
+      return res.status(400).json({
+        success: false,
+        message: 'lat(위도)와 lng(경도)는 필수 항목입니다.',
+        example: {
+          lat: 37.4955155,
+          lng: 126.9595009
+        }
+      });
+    }
 
     // 메뉴 검색 조건 구성
     const menuQuery: any = {};
@@ -490,9 +503,11 @@ router.post('/filter', async (req: Request, res: Response) => {
       }
     }
 
-    // 배달 필터 (deliveryMethod가 '배달'인 경우)
+    // 수령방법 필터
     if (deliveryMethod === '배달') {
       menuQuery.isDeliveryAvailable = true;
+    } else if (deliveryMethod === '픽업') {
+      // 픽업의 경우 특별한 조건 없음 (모든 메뉴 픽업 가능)
     }
 
     // 메뉴 검색 수행
@@ -500,7 +515,7 @@ router.post('/filter', async (req: Request, res: Response) => {
 
     const now = new Date();
 
-    // 수령방법 필터 적용 (지금바로/나중에)
+    // 1단계: 기본 필터링 (시간 기반 수령방법)
     let filteredMenus = menus;
     if (deliveryMethod === '지금바로') {
       filteredMenus = menus.filter(menu => {
@@ -545,19 +560,18 @@ router.post('/filter', async (req: Request, res: Response) => {
       return `${yyyy}${MM}${dd} ${HH}:${mm}:${ss}`;
     };
 
-    // 결과 변환
+    // 2단계: 결과 변환 및 거리 계산
     let results = filteredMenus.map(menu => {
       const store = menu.store as any;
 
-      // 거리 계산 (좌표가 있는 경우에만)
-      let storeDistance = 0;
-      if (lat && lng && typeof lat === 'number' && typeof lng === 'number') {
-        storeDistance = formatKm(haversineDistanceKm(lat, lng, store.lat, store.lng));
-      }
+      // 거리 계산 (위도, 경도가 필수이므로 항상 계산)
+      const storeDistance = formatKm(haversineDistanceKm(lat, lng, store.lat, store.lng));
 
       return {
         storeId: String(store._id),
         storeName: store.name,
+        storeLat: store.lat,
+        storeLng: store.lng,
         menuId: String(menu._id),
         menuName: menu.name,
         menuImageUrls: menu.imageUrls || [],
@@ -577,7 +591,12 @@ router.post('/filter', async (req: Request, res: Response) => {
       };
     });
 
-    // 정렬 적용
+    // 3단계: 품절 필터링 (정렬하기 전에 먼저 적용)
+    if (!includeOutOfStock) {
+      results = results.filter(item => item.stockLeft > 0);
+    }
+
+    // 4단계: 정렬 적용 (품절 제외된 상태에서 정렬)
     if (sortBy === '인기순') {
       results.sort((a, b) => b.totalSoldCount - a.totalSoldCount);
     } else if (sortBy === '가격낮은순') {
@@ -587,7 +606,26 @@ router.post('/filter', async (req: Request, res: Response) => {
     } else if (sortBy === '거리순') {
       results.sort((a, b) => a.storeDistance - b.storeDistance);
     }
-    // 기본값은 정렬하지 않음
+
+    // 5단계: 페이지네이션 (정렬된 결과에서 상위 20개)
+    const finalResults = results.slice(0, 20);
+
+    // 6단계: 지도에 표시할 고유한 매장들만 추출
+    const uniqueStores = new Map();
+    finalResults.forEach(item => {
+      const storeKey = item.storeId;
+      if (!uniqueStores.has(storeKey)) {
+        uniqueStores.set(storeKey, {
+          storeId: item.storeId,
+          storeName: item.storeName,
+          storeLat: item.storeLat,
+          storeLng: item.storeLng,
+          storeDistance: item.storeDistance,
+        });
+      }
+    });
+
+    const mapStores = Array.from(uniqueStores.values());
 
     return res.json({
       success: true,
@@ -598,9 +636,15 @@ router.post('/filter', async (req: Request, res: Response) => {
         priceRange: priceRange || null,
         deliveryMethod: deliveryMethod || null,
         sortBy: sortBy || null,
+        includeOutOfStock: includeOutOfStock,
       },
-      count: results.length,
-      results,
+      stats: {
+        totalAfterFilter: filteredMenus.length,  // 기본 필터 후 개수
+        totalAfterStock: results.length,         // 품절 필터 후 개수 (정렬 전)
+        finalCount: finalResults.length,         // 최종 20개 제한 후 개수
+      },
+      mapStores: mapStores, // 지도에 표시할 매장 정보
+      results: finalResults, // 전체 메뉴 결과
     });
 
   } catch (error) {
