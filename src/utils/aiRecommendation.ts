@@ -189,40 +189,40 @@ export async function getAIRecommendationScores(
     }));
 
     const prompt = `
-당신은 음식 추천 전문 AI입니다. 사용자의 과거 주문 이력과 현재 요청을 바탕으로 각 메뉴의 추천 점수를 매겨주세요.
+        당신은 음식 추천 전문 AI입니다. 사용자의 과거 주문 이력과 현재 요청을 바탕으로 각 메뉴의 추천 점수를 매겨주세요.
 
-## 사용자 프로필
-- 선호 카테고리: ${userPreference.favoriteCategories.join(', ') || '없음'}
-- 평균 주문 금액: ${userPreference.avgOrderPrice.toLocaleString()}원
-- 선호 주문 방식: ${userPreference.preferredOrderType}
-- 총 주문 횟수: ${userPreference.totalOrders}회
-- 최근 주문한 메뉴: ${userPreference.recentOrders.map(o => `${o.menuName}(${o.category})`).join(', ') || '없음'}
+        ## 사용자 프로필
+        - 선호 카테고리: ${userPreference.favoriteCategories.join(', ') || '없음'}
+        - 평균 주문 금액: ${userPreference.avgOrderPrice.toLocaleString()}원
+        - 선호 주문 방식: ${userPreference.preferredOrderType}
+        - 총 주문 횟수: ${userPreference.totalOrders}회
+        - 최근 주문한 메뉴: ${userPreference.recentOrders.map(o => `${o.menuName}(${o.category})`).join(', ') || '없음'}
 
-## 현재 요청
-- 원하는 카테고리: ${request.categories.join(', ')}
-- 최대 가격: ${request.maxPrice.toLocaleString()}원
-- 수령 방법: ${request.deliveryMethod}
+        ## 현재 요청
+        - 원하는 카테고리: ${request.categories.join(', ')}
+        - 최대 가격: ${request.maxPrice.toLocaleString()}원
+        - 수령 방법: ${request.deliveryMethod}
 
-## 평가 기준 (100점 만점)
-1. 카테고리 매칭 (30점): 요청한 카테고리와 일치도
-2. 가격 적정성 (25점): 사용자 평균 주문 금액 대비 적정성
-3. 선호도 일치 (25점): 과거 주문 패턴과의 일치성
-4. 가치 제안 (20점): 할인율, 특별함 등
+        ## 평가 기준 (100점 만점)
+        1. 카테고리 매칭 (30점): 요청한 카테고리와 일치도
+        2. 가격 적정성 (25점): 사용자 평균 주문 금액 대비 적정성
+        3. 선호도 일치 (25점): 과거 주문 패턴과의 일치성
+        4. 가치 제안 (20점): 할인율, 특별함 등
 
-## 메뉴 목록
-${menuInfo.map((menu, index) =>
-  `${index + 1}. ${menu.name} (${menu.category}) - ${menu.price.toLocaleString()}원 (${menu.discountPercent}% 할인)`
-).join('\n')}
+        ## 메뉴 목록
+        ${menuInfo.map((menu, index) =>
+          `${index + 1}. ${menu.name} (${menu.category}) - ${menu.price.toLocaleString()}원 (${menu.discountPercent}% 할인)`
+        ).join('\n')}
 
-각 메뉴에 대해 다음 JSON 형식으로 점수와 추천 이유를 제공해주세요:
-{
-  "menu_id": {
-    "score": 85,
-    "reason": "사용자가 선호하는 일식 카테고리이며, 평균 주문 금액과 비슷한 가격대입니다. 높은 할인율로 가성비가 우수합니다."
-  }
-}
+        각 메뉴에 대해 다음 JSON 형식으로 점수와 추천 이유를 제공해주세요:
+        {
+          "menu_id": {
+            "score": 85,
+            "reason": "사용자가 선호하는 일식 카테고리이며, 평균 주문 금액과 비슷한 가격대입니다. 높은 할인율로 가성비가 우수합니다."
+          }
+        }
 
-중요: 반드시 유효한 JSON 형식으로만 응답하고, 다른 텍스트는 포함하지 마세요.`;
+        중요: 반드시 유효한 JSON 형식으로만 응답하고, 다른 텍스트는 포함하지 마세요.`;
 
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
