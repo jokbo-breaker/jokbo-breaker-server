@@ -30,7 +30,7 @@ router.post('/', async (req: Request, res: Response) => {
     const lngInput: number | undefined = typeof lng === 'number' ? lng : undefined;
 
     if (latInput === undefined || lngInput === undefined) {
-      return res.status(400).json({ success: false, message: 'lag, lng 좌표가 필요합니다.' });
+      return res.status(400).json({ success: false, message: 'lat, lng 좌표가 필요합니다.' });
     }
 
     const type = parseType(req.query.type);
@@ -76,12 +76,30 @@ router.post('/', async (req: Request, res: Response) => {
       originalMenuPrice: number;
       discountedMenuPrice: number;
       discountedPercentage: number;
+      pickUpStartTime: string;
+      pickUpEndTime: string;
+      storeDistance: number; // km 단위
       pickupPrice?: number; // pickup일 때만 포함
     };
 
-        const toItem = (m: any): Item | null => {
+                const toItem = (m: any): Item | null => {
       const s = storeMap.get(String(m.store));
       if (!s) return null;
+
+      // 거리 계산
+      const dist = formatKm(haversineDistanceKm(latInput, lngInput, s.lat, s.lng));
+
+      // 시간 포맷팅 함수
+      const fmt = (d: Date) => {
+        const pad = (n: number) => String(n).padStart(2, '0');
+        const yyyy = d.getFullYear();
+        const MM = pad(d.getMonth() + 1);
+        const dd = pad(d.getDate());
+        const HH = pad(d.getHours());
+        const mm = pad(d.getMinutes());
+        const ss = pad(d.getSeconds());
+        return `${yyyy}${MM}${dd} ${HH}:${mm}:${ss}`;
+      };
 
       const item: Item = {
         storeId: String(s._id),
@@ -93,6 +111,9 @@ router.post('/', async (req: Request, res: Response) => {
         originalMenuPrice: m.originalPrice,
         discountedMenuPrice: m.discountedPrice,
         discountedPercentage: m.discountedPercentage,
+        pickUpStartTime: fmt(new Date(m.pickupStartTime)),
+        pickUpEndTime: fmt(new Date(m.pickupEndTime)),
+        storeDistance: dist,
       };
 
       // pickup 타입일 때만 pickupPrice 포함
@@ -106,13 +127,9 @@ router.post('/', async (req: Request, res: Response) => {
     // 섹션 구성
     const itemsAll = menus.map(toItem).filter((v): v is Item => v !== null);
 
-    // nearBy: 최신 등록 순서로 정렬 (거리 계산 제거)
+    // nearBy: 거리순 정렬
     const nearBy = [...itemsAll]
-      .sort((a, b) => {
-        const ma = menus.find(m => String(m._id) === a.menuId)!;
-        const mb = menus.find(m => String(m._id) === b.menuId)!;
-        return new Date(mb.createdAt).getTime() - new Date(ma.createdAt).getTime();
-      });
+      .sort((a, b) => a.storeDistance - b.storeDistance);
 
     // brandNew: 최근 생성순(메뉴 생성일 기준)
     const brandNew = [...itemsAll]
@@ -163,12 +180,13 @@ router.post('/', async (req: Request, res: Response) => {
 
     return res.json({
       success: true,
-      nearBy,
-      brandNew,
-      lowInStock,
-      mealTime,
-      sweet,
-      pickUpRightNow,
+      totalMenus: itemsAll.length,
+      nearBy: nearBy.slice(0, 10), // 처음 3개만
+      brandNew: brandNew.slice(0, 10),
+      lowInStock: lowInStock.slice(0, 10),
+      mealTime: mealTime.slice(0, 10),
+      sweet: sweet.slice(0, 10),
+      pickUpRightNow: pickUpRightNow.slice(0, 10),
     });
   } catch (error) {
     console.error('❌ /discover 오류:', error);
