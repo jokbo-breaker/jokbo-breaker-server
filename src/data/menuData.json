@@ -1,32 +1,5 @@
 [
     {
-        "category": "한식",
-        "foodType": "식사",
-        "menuName": "시크릿 밀박스",
-        "originalPrice": 22000,
-        "discountRate": "55%",
-        "discountedPrice": 9900,
-        "pickupPrice": 9500,
-        "deliveryAvailable": true,
-        "pickupStartTime": "17:00",
-        "pickupEndTime": "19:00",
-        "deliveryTime": "17:00",
-        "stock": 5,
-        "description": "파동추야의 시그니처 한정판 밀박스로 특별한 미식을 경험하세요. 정성껏 준비한 김치전, 신선한 야채, 그리고 곁들일 수 있는 다양한 반찬이 최대 50% 할인된 가격에 제공됩니다. 모든 요리는 엄격한 품질 관리 아래 조리되었으며, 오늘 저녁 한정 수량으로 선보입니다. 재고 상황에 따라 매일 다른 구성의 메뉴가 포함될 수 있습니다. 조기 마감될 수 있으니 서둘러 방문해 주세요.",
-        "weight": 520,
-        "storeInfo": {
-            "storeName": "파동추야",
-            "latitude": 37.495854,
-            "longitude": 126.9530402,
-            "phoneNumber": "010-822-5988",
-            "address": "서울특별시 동작구 상도동 490-6",
-            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A84.jpg"
-        },
-        "imageUrls": [
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A84.jpg"
-        ]
-    },
-    {
         "category": "일식",
         "foodType": "식사",
         "menuName": "스페셜 밀박스",
@@ -43,9 +16,9 @@
         "weight": 410,
         "storeInfo": {
             "storeName": "마루스시",
-            "latitude": 37.4974424,
-            "longitude": 126.953483,
-            "phoneNumber": "010-814-3361",
+            "latitude": 37.4974858,
+            "longitude": 126.9535158,
+            "phoneNumber": "010-8147-3361",
             "address": "서울특별시 동작구 상도동 485",
             "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF1.jpg"
         },
@@ -71,9 +44,9 @@
         "weight": 680,
         "storeInfo": {
             "storeName": "불타는 소금구이",
-            "latitude": 37.4959895,
-            "longitude": 126.9532348,
-            "phoneNumber": null,
+            "latitude": 37.4960305,
+            "longitude": 126.9532541,
+            "phoneNumber": "010-8211-3802",
             "address": "서울특별시 동작구 상도1동 490-5",
             "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg"
         },
@@ -81,33 +54,6 @@
             "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg",
             "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A83.jpg",
             "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A82.jpg"
-        ]
-    },
-    {
-        "category": "한식",
-        "foodType": "식사",
-        "menuName": "시크릿 밀박스",
-        "originalPrice": 19000,
-        "discountRate": "58%",
-        "discountedPrice": 8000,
-        "pickupPrice": 7500,
-        "deliveryAvailable": false,
-        "pickupStartTime": "16:00",
-        "pickupEndTime": "18:00",
-        "deliveryTime": null,
-        "stock": 7,
-        "description": "명태촌의 시크릿 밀박스로 집에서 편안하게 맛있는 한식을 즐기세요. 깊은 맛의 명태조림과 다양한 밑반찬, 그리고 따뜻한 밥이 최대 50% 할인된 가격에 제공됩니다. 모든 메뉴는 신선한 재료로 당일 조리되었으며, 오늘 저녁 한정 수량으로 선보입니다. 재고 상황에 따라 다양한 찜 요리나 전골이 포함될 수 있습니다. 조기 품절될 수 있으니 서둘러 방문해 주세요.",
-        "weight": 470,
-        "storeInfo": {
-            "storeName": "명태촌",
-            "latitude": 37.4964042,
-            "longitude": 126.9528127,
-            "phoneNumber": null,
-            "address": "서울특별시 상도1동 490",
-            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A84.jpg"
-        },
-        "imageUrls": [
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A84.jpg"
         ]
     },
     {
@@ -127,8 +73,8 @@
         "weight": 750,
         "storeInfo": {
             "storeName": "상도곱창",
-            "latitude": 37.4970428,
-            "longitude": 126.9535359,
+            "latitude": 37.4969134,
+            "longitude": 126.953412,
             "phoneNumber": "010-821-3802",
             "address": "서울특별시 동작구 상도동 488-6",
             "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg"
@@ -152,46 +98,18 @@
         "pickupEndTime": "21:00",
         "deliveryTime": null,
         "stock": 4,
-        "description": "피자 파자의 스페셜 밀박스로 이탈리아의 맛을 경험하세요. 신선한 재료로 만든 피자 한 조각과 다양한 파스타, 그리고 곁들일 수 있는 샐러드와 음료가 최대 50% 할인된 가격에 제공됩니다. 모든 요리는 엄격한 품질 관리 아래 조리되었으며, 당일 소진을 목표로 한정 수량 판매합니다. 재고 상황에 따라 다른 종류의 파스타나 피자, 샐러드가 포함될 수 있습니다. 조기 품절될 수 있으니 서둘러 방문해 주세요.",
+        "description": "노모어 피자의 스페셜 밀박스로 이탈리아의 맛을 경험하세요. 신선한 재료로 만든 피자 한 조각과 다양한 파스타, 그리고 곁들일 수 있는 샐러드와 음료가 최대 50% 할인된 가격에 제공됩니다. 모든 요리는 엄격한 품질 관리 아래 조리되었으며, 당일 소진을 목표로 한정 수량 판매합니다. 재고 상황에 따라 다른 종류의 파스타나 피자, 샐러드가 포함될 수 있습니다. 조기 품절될 수 있으니 서둘러 방문해 주세요.",
         "weight": 480,
         "storeInfo": {
-            "storeName": "피자 파자",
-            "latitude": 37.4955155,
-            "longitude": 126.9595009,
+            "storeName": "노모어피자 숭실대점",
+            "latitude": 37.4955035,
+            "longitude": 126.9546841,
             "phoneNumber": "010-828-7448",
             "address": "서울특별시 동작구 상도동 490-5",
             "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%91%E1%85%B5%E1%84%8C%E1%85%A1.jpg"
         },
         "imageUrls": [
             "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%91%E1%85%B5%E1%84%8C%E1%85%A1.jpg"
-        ]
-    },
-    {
-        "category": "한식",
-        "foodType": "식사",
-        "menuName": "시크릿 밀박스",
-        "originalPrice": 24000,
-        "discountRate": "70%",
-        "discountedPrice": 7000,
-        "pickupPrice": 6500,
-        "deliveryAvailable": true,
-        "pickupStartTime": "16:30",
-        "pickupEndTime": "18:30",
-        "deliveryTime": "16:30",
-        "stock": 6,
-        "description": "해남식당의 시크릿 밀박스로 풍성한 해산물 요리를 즐겨보세요. 신선한 해산물로 만든 다양한 요리와 밥, 그리고 곁들일 수 있는 반찬들이 최대 50% 할인된 가격에 제공됩니다. 모든 요리는 당일 공수한 신선한 재료를 사용하며, 오늘 저녁 한정 수량으로 판매됩니다. 재고 상황에 따라 다양한 해산물 요리가 포함될 수 있습니다. 조기 마감될 수 있으니 서둘러 방문해 주세요.",
-        "weight": 610,
-        "storeInfo": {
-            "storeName": "해남식당",
-            "latitude": 37.4972583,
-            "longitude": 126.9537096,
-            "phoneNumber": "010-822-2598",
-            "address": "서울특별시 동작구 상도1동 485-1",
-            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF1.jpg"
-        },
-        "imageUrls": [
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF1.jpg",
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF2.jpg"
         ]
     },
     {
@@ -207,12 +125,12 @@
         "pickupEndTime": "19:00",
         "deliveryTime": null,
         "stock": 9,
-        "description": "고고 스시의 시크릿 밀박스로 특별한 미식을 만나보세요. 신선한 재료로 정성껏 준비한 스시와 사시미, 그리고 곁들일 수 있는 샐러드와 미소 된장국이 최대 50% 할인된 가격에 제공됩니다. 모든 요리는 엄선된 재료로 조리되었으며, 오늘 저녁 한정 수량으로 선보입니다. 재고 상황에 따라 다양한 종류의 초밥과 롤이 포함될 수 있습니다. 조기 품절될 수 있으니 서둘러 방문해 주세요.",
+        "description": "초밥이야기의 시크릿 밀박스로 특별한 미식을 만나보세요. 신선한 재료로 정성껏 준비한 스시와 사시미, 그리고 곁들일 수 있는 샐러드와 미소 된장국이 최대 50% 할인된 가격에 제공됩니다. 모든 요리는 엄선된 재료로 조리되었으며, 오늘 저녁 한정 수량으로 선보입니다. 재고 상황에 따라 다양한 종류의 초밥과 롤이 포함될 수 있습니다. 조기 품절될 수 있으니 서둘러 방문해 주세요.",
         "weight": 390,
         "storeInfo": {
-            "storeName": "고고 스시",
-            "latitude": 37.4971871,
-            "longitude": 126.9537525,
+            "storeName": "초밥이야기 숭실대본점",
+            "latitude": 37.4953245,
+            "longitude": 126.9554272,
             "phoneNumber": null,
             "address": "서울특별시 동작구 상도동 485-1",
             "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF1.jpg"
@@ -220,61 +138,6 @@
         "imageUrls": [
             "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF1.jpg",
             "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF2.jpg"
-        ]
-    },
-    {
-        "category": "한식",
-        "foodType": "식사",
-        "menuName": "스페셜 밀박스",
-        "originalPrice": 26000,
-        "discountRate": "59%",
-        "discountedPrice": 10500,
-        "pickupPrice": 10000,
-        "deliveryAvailable": true,
-        "pickupStartTime": "17:30",
-        "pickupEndTime": "19:30",
-        "deliveryTime": "17:30",
-        "stock": 1,
-        "description": "코끼리의 스페셜 밀박스로 푸짐하고 맛있는 한 끼를 즐겨보세요. 신선한 곱창을 포함한 다양한 부위의 구이와 볶음밥, 그리고 곁들일 수 있는 소스와 채소가 최대 50% 할인된 가격에 제공됩니다. 모든 재료는 당일 공수한 신선한 재료를 사용하며, 오늘 저녁 한정 수량으로 판매됩니다. 재고 상황에 따라 볶음밥, 특수 부위 구이 등이 추가될 수 있습니다. 조기 마감될 수 있으니 서둘러 방문해 주세요.",
-        "weight": 720,
-        "storeInfo": {
-            "storeName": "코끼리",
-            "latitude": 37.4962299,
-            "longitude": 126.9531818,
-            "phoneNumber": "010-812-4260",
-            "address": "서울특별시 상도동 490",
-            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A84.jpg"
-        },
-        "imageUrls": [
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A84.jpg",
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg"
-        ]
-    },
-    {
-        "category": "양식",
-        "foodType": "식사",
-        "menuName": "스페셜 밀박스",
-        "originalPrice": 23000,
-        "discountRate": "68%",
-        "discountedPrice": 7500,
-        "pickupPrice": 7000,
-        "deliveryAvailable": false,
-        "pickupStartTime": "18:00",
-        "pickupEndTime": "20:00",
-        "deliveryTime": null,
-        "stock": 0,
-        "description": "미스터 피자 숭실대점의 스페셜 밀박스로 푸짐한 피자를 즐겨보세요. 신선한 재료로 만든 다양한 피자와 사이드 메뉴, 그리고 음료가 최대 50% 할인된 가격에 제공됩니다. 모든 메뉴는 당일 준비된 신선한 재료를 사용하며, 오늘 저녁 한정 수량으로 판매됩니다. 재고 상황에 따라 다양한 피자, 사이드 메뉴 등이 포함될 수 있습니다. 조기 마감될 수 있으니 서둘러 방문해 주세요.",
-        "weight": 550,
-        "storeInfo": {
-            "storeName": "미스터 피자 숭실대점",
-            "latitude": 37.4955214,
-            "longitude": 126.9550478,
-            "phoneNumber": "010-816-5632",
-            "address": "서울특별시 상도동 490-6",
-            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%91%E1%85%B5%E1%84%8C%E1%85%A1.jpg"
-        },
-        "imageUrls": [
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%91%E1%85%B5%E1%84%8C%E1%85%A1.jpg"
         ]
     },
     {
@@ -290,75 +153,18 @@
         "pickupEndTime": "18:00",
         "deliveryTime": "16:00",
         "stock": 4,
-        "description": "전주식당의 시크릿 밀박스로 집에서 편안하게 맛있는 한식을 즐기세요. 깊은 맛의 전주 비빔밥과 다양한 밑반찬, 그리고 따뜻한 밥이 최대 50% 할인된 가격에 제공됩니다. 모든 메뉴는 신선한 재료로 당일 조리되었으며, 오늘 저녁 한정 수량으로 선보입니다. 재고 상황에 따라 다양한 찜 요리나 전골이 포함될 수 있습니다. 조기 품절될 수 있으니 서둘러 방문해 주세요.",
+        "description": "밀알 식당의 시크릿 밀박스로 집에서 편안하게 맛있는 한식을 즐기세요. 깊은 맛의 전주 비빔밥과 다양한 밑반찬, 그리고 따뜻한 밥이 최대 50% 할인된 가격에 제공됩니다. 모든 메뉴는 신선한 재료로 당일 조리되었으며, 오늘 저녁 한정 수량으로 선보입니다. 재고 상황에 따라 다양한 찜 요리나 전골이 포함될 수 있습니다. 조기 품절될 수 있으니 서둘러 방문해 주세요.",
         "weight": 630,
         "storeInfo": {
-            "storeName": "전주식당",
-            "latitude": 37.4962299,
-            "longitude": 126.9531818,
+            "storeName": "밀알식당",
+            "latitude": 37.4951991,
+            "longitude": 126.9564459,
             "phoneNumber": "010-826-6450",
             "address": "서울특별시 동작구 상도동 490",
             "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A81.jpg"
         },
         "imageUrls": [
             "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A81.jpg",
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A82.jpg"
-        ]
-    },
-    {
-        "category": "한식",
-        "foodType": "식사",
-        "menuName": "스페셜 밀박스",
-        "originalPrice": 20000,
-        "discountRate": "52%",
-        "discountedPrice": 9500,
-        "pickupPrice": 9000,
-        "deliveryAvailable": false,
-        "pickupStartTime": "18:30",
-        "pickupEndTime": "20:30",
-        "deliveryTime": null,
-        "stock": 2,
-        "description": "대풍의 스페셜 밀박스로 푸짐하고 맛있는 한 끼를 즐겨보세요. 신선한 고기로 만든 숯불구이와 함께 곁들일 수 있는 된장찌개, 신선한 쌈 채소, 그리고 다양한 밑반찬이 최대 50% 할인된 가격에 제공됩니다. 모든 음식은 당일 준비된 신선한 재료를 사용하며, 오늘 저녁 한정 수량으로 판매됩니다. 재고 상황에 따라 다양한 부위의 고기가 포함될 수 있습니다. 조기 마감될 수 있으니 서둘러 방문해 주세요.",
-        "weight": 580,
-        "storeInfo": {
-            "storeName": "대풍",
-            "latitude": 37.4962299,
-            "longitude": 126.9531818,
-            "phoneNumber": "010-814-1351",
-            "address": "서울특별시 동작구 상도동 490",
-            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A83.jpg"
-        },
-        "imageUrls": [
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A83.jpg",
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A82.jpg"
-        ]
-    },
-    {
-        "category": "한식",
-        "foodType": "식사",
-        "menuName": "스페셜 밀박스",
-        "originalPrice": 25000,
-        "discountRate": "58%",
-        "discountedPrice": 10500,
-        "pickupPrice": 10000,
-        "deliveryAvailable": true,
-        "pickupStartTime": "17:00",
-        "pickupEndTime": "19:00",
-        "deliveryTime": "17:00",
-        "stock": 8,
-        "description": "한도 곱창의 스페셜 밀박스로 푸짐하고 맛있는 식사를 즐겨보세요. 신선한 곱창을 포함한 다양한 부위의 구이와 볶음밥, 그리고 곁들일 수 있는 소스와 채소가 최대 50% 할인된 가격에 제공됩니다. 모든 재료는 당일 공수한 신선한 재료를 사용하며, 오늘 저녁 한정 수량으로 판매됩니다. 재고 상황에 따라 볶음밥, 특수 부위 구이 등이 추가될 수 있습니다. 조기 마감될 수 있으니 서둘러 방문해 주세요.",
-        "weight": 670,
-        "storeInfo": {
-            "storeName": "한도 곱창",
-            "latitude": 37.4962299,
-            "longitude": 126.9531818,
-            "phoneNumber": "010-824-7834",
-            "address": "서울특별시 동작구 상도동 490",
-            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg"
-        },
-        "imageUrls": [
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg",
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A83.jpg",
             "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A82.jpg"
         ]
     },
@@ -375,130 +181,18 @@
         "pickupEndTime": "21:30",
         "deliveryTime": null,
         "stock": 5,
-        "description": "신촌설렁탕 숭실대점의 시크릿 밀박스로 따뜻하고 푸짐한 한 끼를 즐기세요. 깊은 맛의 설렁탕과 밥, 그리고 곁들일 수 있는 다양한 반찬이 최대 50% 할인된 가격에 제공됩니다. 모든 음식은 엄격한 품질 관리 아래 조리되었으며, 오늘 저녁 한정 수량으로 선보입니다. 재고 상황에 따라 수육, 만두 등 다양한 메뉴가 포함될 수 있습니다. 조기 품절될 수 있으니 서둘러 방문해 주세요.",
+        "description": "더진국수육국밥 숭실대점의 시크릿 밀박스로 따뜻하고 푸짐한 한 끼를 즐기세요. 깊은 맛의 설렁탕과 밥, 그리고 곁들일 수 있는 다양한 반찬이 최대 50% 할인된 가격에 제공됩니다. 모든 음식은 엄격한 품질 관리 아래 조리되었으며, 오늘 저녁 한정 수량으로 선보입니다. 재고 상황에 따라 수육, 만두 등 다양한 메뉴가 포함될 수 있습니다. 조기 품절될 수 있으니 서둘러 방문해 주세요.",
         "weight": 540,
         "storeInfo": {
-            "storeName": "신촌설렁탕 숭실대점",
-            "latitude": 37.4956891,
-            "longitude": 126.9554308,
+            "storeName": "더진국수육국밥 숭실대점",
+            "latitude": 37.494771,
+            "longitude": 126.9569274,
             "phoneNumber": "010-824-2223",
             "address": "서울특별시 동작구 상도1동 504-24",
             "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식4.jpg"
         },
         "imageUrls": [
             "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식4.jpg"
-        ]
-    },
-    {
-        "category": "한식",
-        "foodType": "식사",
-        "menuName": "스페셜 밀박스",
-        "originalPrice": 22000,
-        "discountRate": "62%",
-        "discountedPrice": 8500,
-        "pickupPrice": 8000,
-        "deliveryAvailable": true,
-        "pickupStartTime": "16:30",
-        "pickupEndTime": "18:30",
-        "deliveryTime": "16:30",
-        "stock": 1,
-        "description": "보들이족발 숭실대점의 스페셜 밀박스로 푸짐하고 맛있는 족발을 즐겨보세요. 신선한 족발과 함께 곁들일 수 있는 막국수, 그리고 다양한 밑반찬이 최대 50% 할인된 가격에 제공됩니다. 모든 음식은 당일 준비된 신선한 재료를 사용하며, 오늘 저녁 한정 수량으로 판매됩니다. 재고 상황에 따라 족발, 보쌈, 막국수 등이 포함될 수 있습니다. 조기 마감될 수 있으니 서둘러 방문해 주세요.",
-        "weight": 690,
-        "storeInfo": {
-            "storeName": "보들이족발 숭실대점",
-            "latitude": 37.4962299,
-            "longitude": 126.9531818,
-            "phoneNumber": "010-812-4260",
-            "address": "서울특별시 동작구 상도동 490",
-            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%8C%E1%85%A9%E1%86%A8%E1%84%87%E1%85%A1%E1%86%AF.jpg"
-        },
-        "imageUrls": [
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%8C%E1%85%A9%E1%86%A8%E1%84%87%E1%85%A1%E1%86%AF.jpg"
-        ]
-    },
-    {
-        "category": "한식",
-        "foodType": "식사",
-        "menuName": "시크릿 밀박스",
-        "originalPrice": 25000,
-        "discountRate": "51%",
-        "discountedPrice": 12500,
-        "pickupPrice": 12000,
-        "deliveryAvailable": false,
-        "pickupStartTime": "17:00",
-        "pickupEndTime": "19:00",
-        "deliveryTime": null,
-        "stock": 6,
-        "description": "일도곱창의 시크릿 밀박스로 푸짐하고 맛있는 식사를 즐겨보세요. 신선한 곱창을 포함한 다양한 부위의 구이와 볶음밥, 그리고 곁들일 수 있는 소스와 채소가 최대 50% 할인된 가격에 제공됩니다. 모든 재료는 당일 공수한 신선한 재료를 사용하며, 오늘 저녁 한정 수량으로 판매됩니다. 재고 상황에 따라 볶음밥, 특수 부위 구이 등이 추가될 수 있습니다. 조기 마감될 수 있으니 서둘러 방문해 주세요.",
-        "weight": 780,
-        "storeInfo": {
-            "storeName": "일도곱창",
-            "latitude": 37.4962299,
-            "longitude": 126.9531818,
-            "phoneNumber": "010-822-7933",
-            "address": "서울특별시 동작구 상도동 490",
-            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg"
-        },
-        "imageUrls": [
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg",
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A83.jpg",
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A82.jpg"
-        ]
-    },
-    {
-        "category": "한식",
-        "foodType": "식사",
-        "menuName": "스페셜 밀박스",
-        "originalPrice": 27000,
-        "discountRate": "68%",
-        "discountedPrice": 8500,
-        "pickupPrice": 8000,
-        "deliveryAvailable": true,
-        "pickupStartTime": "18:00",
-        "pickupEndTime": "20:00",
-        "deliveryTime": "18:00",
-        "stock": 3,
-        "description": "한도 곱창의 스페셜 밀박스로 푸짐하고 맛있는 식사를 즐겨보세요. 신선한 곱창을 포함한 다양한 부위의 구이와 볶음밥, 그리고 곁들일 수 있는 소스와 채소가 최대 50% 할인된 가격에 제공됩니다. 모든 재료는 당일 공수한 신선한 재료를 사용하며, 오늘 저녁 한정 수량으로 판매됩니다. 재고 상황에 따라 볶음밥, 특수 부위 구이 등이 추가될 수 있습니다. 조기 마감될 수 있으니 서둘러 방문해 주세요.",
-        "weight": 710,
-        "storeInfo": {
-            "storeName": "한도 곱창",
-            "latitude": 37.4962299,
-            "longitude": 126.9531818,
-            "phoneNumber": "010-824-7834",
-            "address": "서울특별시 동작구 상도동 490",
-            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg"
-        },
-        "imageUrls": [
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%89%E1%85%A1%E1%86%B7%E1%84%80%E1%85%A7%E1%86%B8%E1%84%89%E1%85%A1%E1%86%AF.jpg",
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A83.jpg",
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A82.jpg"
-        ]
-    },
-    {
-        "category": "한식",
-        "foodType": "식사",
-        "menuName": "시크릿 밀박스",
-        "originalPrice": 18000,
-        "discountRate": "72%",
-        "discountedPrice": 5000,
-        "pickupPrice": 4500,
-        "deliveryAvailable": false,
-        "pickupStartTime": "16:00",
-        "pickupEndTime": "18:00",
-        "deliveryTime": null,
-        "stock": 7,
-        "description": "삼백집 숭실대점의 시크릿 밀박스로 따뜻하고 푸짐한 한 끼를 즐기세요. 깊은 맛의 콩나물국밥과 밥, 그리고 곁들일 수 있는 다양한 반찬이 최대 50% 할인된 가격에 제공됩니다. 모든 메뉴는 신선한 재료로 당일 조리되었으며, 오늘 저녁 한정 수량으로 선보입니다. 재고 상황에 따라 수육, 만두 등 다양한 메뉴가 포함될 수 있습니다. 조기 품절될 수 있으니 서둘러 방문해 주세요.",
-        "weight": 440,
-        "storeInfo": {
-            "storeName": "삼백집 숭실대점",
-            "latitude": 37.4956795,
-            "longitude": 126.9550974,
-            "phoneNumber": "010-812-7001",
-            "address": "서울특별시 동작구 상도동 490-5",
-            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A84.jpg"
-        },
-        "imageUrls": [
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A84.jpg"
         ]
     },
     {
@@ -514,12 +208,12 @@
         "pickupEndTime": "19:30",
         "deliveryTime": "17:30",
         "stock": 4,
-        "description": "전주식당의 스페셜 밀박스로 집에서 편안하게 맛있는 한식을 즐기세요. 깊은 맛의 전주 비빔밥과 다양한 밑반찬, 그리고 따뜻한 밥이 최대 50% 할인된 가격에 제공됩니다. 모든 메뉴는 신선한 재료로 당일 조리되었으며, 오늘 저녁 한정 수량으로 선보입니다. 재고 상황에 따라 다양한 찜 요리나 전골이 포함될 수 있습니다. 조기 품절될 수 있으니 서둘러 방문해 주세요.",
+        "description": "송이네집밥의 스페셜 밀박스로 집에서 편안하게 맛있는 한식을 즐기세요. 깊은 맛의 쌈밥과 다양한 밑반찬, 그리고 따뜻한 밥이 최대 50% 할인된 가격에 제공됩니다. 모든 메뉴는 신선한 재료로 당일 조리되었으며, 오늘 저녁 한정 수량으로 선보입니다. 재고 상황에 따라 다양한 찜 요리나 전골이 포함될 수 있습니다. 조기 품절될 수 있으니 서둘러 방문해 주세요.",
         "weight": 600,
         "storeInfo": {
-            "storeName": "전주식당",
-            "latitude": 37.4962299,
-            "longitude": 126.9531818,
+            "storeName": "송이네집밥",
+            "latitude": 37.4945619,
+            "longitude": 126.956374,
             "phoneNumber": "010-826-6450",
             "address": "서울특별시 동작구 상도동 490",
             "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A81.jpg"
@@ -527,116 +221,6 @@
         "imageUrls": [
             "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A81.jpg",
             "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A82.jpg"
-        ]
-    },
-    {
-        "category": "한식",
-        "foodType": "식사",
-        "menuName": "스페셜 밀박스",
-        "originalPrice": 25000,
-        "discountRate": "71%",
-        "discountedPrice": 7000,
-        "pickupPrice": 6500,
-        "deliveryAvailable": false,
-        "pickupStartTime": "18:00",
-        "pickupEndTime": "20:00",
-        "deliveryTime": null,
-        "stock": 0,
-        "description": "대풍의 스페셜 밀박스로 푸짐하고 맛있는 한 끼를 즐겨보세요. 신선한 고기로 만든 숯불구이와 함께 곁들일 수 있는 된장찌개, 신선한 쌈 채소, 그리고 다양한 밑반찬이 최대 50% 할인된 가격에 제공됩니다. 모든 음식은 당일 준비된 신선한 재료를 사용하며, 오늘 저녁 한정 수량으로 판매됩니다. 재고 상황에 따라 다양한 부위의 고기가 포함될 수 있습니다. 조기 마감될 수 있으니 서둘러 방문해 주세요.",
-        "weight": 740,
-        "storeInfo": {
-            "storeName": "대풍",
-            "latitude": 37.4962299,
-            "longitude": 126.9531818,
-            "phoneNumber": "010-814-1351",
-            "address": "서울특별시 동작구 상도동 490",
-            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A83.jpg"
-        },
-        "imageUrls": [
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A83.jpg",
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%89%E1%85%B5%E1%86%A82.jpg"
-        ]
-    },
-    {
-        "category": "한식",
-        "foodType": "식사",
-        "menuName": "시크릿 밀박스",
-        "originalPrice": 19500,
-        "discountRate": "60%",
-        "discountedPrice": 8000,
-        "pickupPrice": 7500,
-        "deliveryAvailable": true,
-        "pickupStartTime": "16:00",
-        "pickupEndTime": "18:00",
-        "deliveryTime": "16:00",
-        "stock": 9,
-        "description": "토속촌의 시크릿 밀박스로 집에서 편안하게 맛있는 한식을 즐기세요. 깊은 맛의 토속적인 비빔밥과 다양한 밑반찬, 그리고 따뜻한 밥이 최대 50% 할인된 가격에 제공됩니다. 모든 메뉴는 신선한 재료로 당일 조리되었으며, 오늘 저녁 한정 수량으로 선보입니다. 재고 상황에 따라 다양한 찜 요리나 전골이 포함될 수 있습니다. 조기 품절될 수 있으니 서둘러 방문해 주세요.",
-        "weight": 510,
-        "storeInfo": {
-            "storeName": "토속촌",
-            "latitude": 37.4962299,
-            "longitude": 126.9531818,
-            "phoneNumber": "010-824-2131",
-            "address": "서울특별시 동작구 상도동 490",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식3.jpg"
-        },
-        "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식3.jpg"
-        ]
-    },
-    {
-        "category": "디저트",
-        "foodType": "디저트",
-        "menuName": "시크릿 디저트박스",
-        "originalPrice": 12000,
-        "discountRate": "54%",
-        "discountedPrice": 5500,
-        "pickupPrice": 5000,
-        "deliveryAvailable": false,
-        "pickupStartTime": "17:00",
-        "pickupEndTime": "19:00",
-        "deliveryTime": null,
-        "stock": 3,
-        "description": "마루스시에서 선보이는 오늘의 시크릿 디저트박스로 특별한 마무리를 경험하세요. 신선한 과일과 달콤한 떡, 그리고 일본식 디저트가 최대 50% 할인된 가격에 제공됩니다. 모든 요리는 엄선된 재료로 조리되었으며, 당일 소진을 목표로 한정 수량 판매합니다. 재고 상황에 따라 다양한 종류의 디저트가 포함될 수 있습니다. 조기 품절될 수 있으니 서둘러 방문해 주세요.",
-        "weight": 350,
-        "storeInfo": {
-            "storeName": "마루스시",
-            "latitude": 37.4974424,
-            "longitude": 126.953483,
-            "phoneNumber": "010-814-3361",
-            "address": "서울특별시 동작구 상도동 485",
-            "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF1.jpg"
-        },
-        "imageUrls": [
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF1.jpg",
-            "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%92%E1%85%A2%E1%84%89%E1%85%A1%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AF2.jpg"
-        ]
-    },
-    {
-        "category": "한식",
-        "foodType": "식사",
-        "menuName": "스페셜 밀박스",
-        "originalPrice": 21000,
-        "discountRate": "59%",
-        "discountedPrice": 8500,
-        "pickupPrice": 8000,
-        "deliveryAvailable": true,
-        "pickupStartTime": "16:30",
-        "pickupEndTime": "18:30",
-        "deliveryTime": "16:30",
-        "stock": 5,
-        "description": "장수식당의 스페셜 밀박스로 푸짐하고 맛있는 한 끼를 즐겨보세요. 신선한 고기로 만든 숯불구이와 함께 곁들일 수 있는 된장찌개, 신선한 쌈 채소, 그리고 다양한 밑반찬이 최대 50% 할인된 가격에 제공됩니다. 모든 음식은 당일 준비된 신선한 재료를 사용하며, 오늘 저녁 한정 수량으로 판매됩니다. 재고 상황에 따라 다양한 부위의 고기가 포함될 수 있습니다. 조기 마감될 수 있으니 서둘러 방문해 주세요.",
-        "weight": 590,
-        "storeInfo": {
-            "storeName": "장수식당",
-            "latitude": 37.4962299,
-            "longitude": 126.9531818,
-            "phoneNumber": "010-824-7834",
-            "address": "서울특별시 동작구 상도동 490",
-            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식4.jpg"
-        },
-        "imageUrls": [
-            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식4.jpg"
         ]
     },
     {
@@ -652,12 +236,12 @@
         "pickupEndTime": "19:00",
         "deliveryTime": null,
         "stock": 2,
-        "description": "홍콩반점 숭실대점의 시크릿 밀박스로 집에서 편안하게 맛있는 중식을 즐기세요. 쫄깃한 짜장면, 매콤한 짬뽕, 그리고 바삭한 탕수육이 최대 50% 할인된 가격에 제공됩니다. 모든 메뉴는 신선한 재료로 당일 조리되었으며, 오늘 저녁 한정 수량으로 선보입니다. 재고 상황에 따라 다양한 중식 메뉴가 포함될 수 있습니다. 조기 품절될 수 있으니 서둘러 방문해 주세요.",
+        "description": "취향 숭실대점의 시크릿 밀박스로 집에서 편안하게 맛있는 중식을 즐기세요. 쫄깃한 짜장면, 매콤한 짬뽕, 그리고 바삭한 탕수육이 최대 50% 할인된 가격에 제공됩니다. 모든 메뉴는 신선한 재료로 당일 조리되었으며, 오늘 저녁 한정 수량으로 선보입니다. 재고 상황에 따라 다양한 중식 메뉴가 포함될 수 있습니다. 조기 품절될 수 있으니 서둘러 방문해 주세요.",
         "weight": 650,
         "storeInfo": {
-            "storeName": "홍콩반점 숭실대점",
-            "latitude": 37.4955214,
-            "longitude": 126.9550478,
+            "storeName": "취향 숭실대점",
+            "latitude": 37.4953514,
+            "longitude": 126.9551885,
             "phoneNumber": "010-825-0410",
             "address": "서울특별시 동작구 상도동 490-6",
             "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%8C%E1%85%AE%E1%86%BC%E1%84%89%E1%85%B5%E1%86%A8-%E1%84%8D%E1%85%A1%E1%84%8C%E1%85%A1%E1%86%BC%E1%84%86%E1%85%A7%E1%86%AB.jpg"
@@ -683,8 +267,8 @@
         "weight": 420,
         "storeInfo": {
             "storeName": "투썸플레이스 숭실대점",
-            "latitude": 37.4955155,
-            "longitude": 126.9595009,
+            "latitude": 37.4948792,
+            "longitude": 126.958466,
             "phoneNumber": "010-828-7448",
             "address": "서울특별시 동작구 상도동 490-5",
             "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%90%E1%85%AE%E1%84%8A%E1%85%A5%E1%86%B7-%E1%84%83%E1%85%B5%E1%84%8C%E1%85%A5%E1%84%90%E1%85%B3.jpg"
@@ -710,8 +294,8 @@
         "weight": 600,
         "storeInfo": {
             "storeName": "고씨네",
-            "latitude": 37.4962299,
-            "longitude": 126.9531818,
+            "latitude": 37.4949746,
+            "longitude": 126.953181,
             "phoneNumber": "010-823-1234",
             "address": "서울특별시 동작구 상도동 490",
             "mainImageUrl": "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%80%E1%85%A9%E1%84%8A%E1%85%B5%E1%84%82%E1%85%A6-%E1%84%8F%E1%85%A1%E1%84%85%E1%85%A61.jpg"
@@ -719,6 +303,330 @@
         "imageUrls": [
             "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%80%E1%85%A9%E1%84%8A%E1%85%B5%E1%84%82%E1%85%A6-%E1%84%8F%E1%85%A1%E1%84%85%E1%85%A61.jpg",
             "https://no-janban-day.s3.eu-north-1.amazonaws.com/menu-images/%E1%84%80%E1%85%A9%E1%84%8A%E1%85%B5%E1%84%82%E1%85%A6-%E1%84%8F%E1%85%A1%E1%84%85%E1%85%A62.jpg"
+        ]
+    },
+        {
+        "category": "빵",
+        "foodType": "디저트",
+        "menuName": "시크릿 디저트박스",
+        "originalPrice": 15000,
+        "discountRate": "60%",
+        "discountedPrice": 6000,
+        "pickupPrice": 5500,
+        "deliveryAvailable": false,
+        "pickupStartTime": "16:00",
+        "pickupEndTime": "18:00",
+        "deliveryTime": null,
+        "stock": 8,
+        "description": "가춘에서 선보이는 유통 임박 식빵, 베이글, 크루아상 등을 활용한 시크릿 디저트박스입니다. 신선도를 유지하면서도 음식물 쓰레기를 줄이는 동네 빵집의 특별한 메뉴로, 경제적인 가격으로 건강한 디저트를 경험할 수 있습니다. 당일 소진을 목표로 한정 수량 판매하며, 재고 상황에 따라 다양한 빵류가 포함될 수 있습니다.",
+        "weight": 450,
+        "storeInfo": {
+            "storeName": "가춘",
+            "latitude": 37.4967893,
+            "longitude": 126.9535307,
+            "phoneNumber": "02-8211-3652",
+            "address": "서울특별시 동작구 상도로61길 15",
+            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/빵1.jpg"
+        },
+        "imageUrls": [
+            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/빵1.jpg"
+        ]
+    },
+    {
+        "category": "한식",
+        "foodType": "식사",
+        "menuName": "스페셜 밀박스",
+        "originalPrice": 18000,
+        "discountRate": "55%",
+        "discountedPrice": 8000,
+        "pickupPrice": 7500,
+        "deliveryAvailable": true,
+        "pickupStartTime": "17:00",
+        "pickupEndTime": "19:00",
+        "deliveryTime": "17:00",
+        "stock": 6,
+        "description": "깍뚝집의 스페셜 밀박스로 남은 재료를 활용한 깍두기, 한식 반찬 중심의 백반 세트를 제공합니다. 음식물 쓰레기를 줄이고 지역 식문화를 지향하는 특별한 메뉴로, 신선한 재료로 당일 조리되었습니다. 오늘 저녁 한정 수량으로 선보이며, 재고 상황에 따라 다양한 반찬이 포함될 수 있습니다.",
+        "weight": 580,
+        "storeInfo": {
+            "storeName": "깍뚝집",
+            "latitude": 37.4973113,
+            "longitude": 126.9536759,
+            "phoneNumber": "02-8225-3007",
+            "address": "서울특별시 동작구 상도1동 485-3",
+            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식1.jpg"
+        },
+        "imageUrls": [
+            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/한식1.jpg"
+        ]
+    },
+    {
+        "category": "일식",
+        "foodType": "식사",
+        "menuName": "시크릿 밀박스",
+        "originalPrice": 20000,
+        "discountRate": "50%",
+        "discountedPrice": 10000,
+        "pickupPrice": 9500,
+        "deliveryAvailable": false,
+        "pickupStartTime": "18:00",
+        "pickupEndTime": "20:00",
+        "deliveryTime": null,
+        "stock": 4,
+        "description": "핵밥 숭실대점의 시크릿 밀박스로 폐기 직전 고기와 채소를 활용한 덮밥, 라멘, 돈까스 등을 제공합니다. 맛과 환경 모두 챙길 수 있는 가정식 전문점의 특별한 메뉴로, 당일 준비된 신선한 재료를 사용합니다. 오늘 저녁 한정 수량으로 판매되며, 재고 상황에 따라 다양한 일식 메뉴가 포함될 수 있습니다.",
+        "weight": 620,
+        "storeInfo": {
+            "storeName": "핵밥 숭실대점",
+            "latitude": 37.4948536,
+            "longitude": 126.9564329,
+            "phoneNumber": "02-822-5918",
+            "address": "서울특별시 동작구 상도로 169",
+            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/일식1.jpg"
+        },
+        "imageUrls": [
+            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/일식1.jpg"
+        ]
+    },
+    {
+        "category": "디저트",
+        "foodType": "디저트",
+        "menuName": "스페셜 디저트박스",
+        "originalPrice": 12000,
+        "discountRate": "58%",
+        "discountedPrice": 5000,
+        "pickupPrice": 4500,
+        "deliveryAvailable": true,
+        "pickupStartTime": "16:30",
+        "pickupEndTime": "18:30",
+        "deliveryTime": "16:30",
+        "stock": 7,
+        "description": "케이크팝 숭실대의 스페셜 디저트박스로 조각 케이크와 케이크팝을 폐기 임박 재료로 제작하여 제공합니다. 환경과 달콤함을 동시에 지키는 디저트 카페의 특별한 메뉴로, 공부하기 좋은 공간으로도 인기입니다. 당일 소진을 목표로 한정 수량 판매하며, 재고 상황에 따라 다양한 케이크와 디저트가 포함될 수 있습니다.",
+        "weight": 380,
+        "storeInfo": {
+            "storeName": "케이크팝 숭실대",
+            "latitude": 37.4950477,
+            "longitude": 126.9574853,
+            "phoneNumber": "02-828-8799",
+            "address": "서울특별시 동작구 상도로62길 8",
+            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/디저트1.jpg"
+        },
+        "imageUrls": [
+            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/디저트1.jpg"
+        ]
+    },
+    {
+        "category": "건강식",
+        "foodType": "식사",
+        "menuName": "시크릿 밀박스",
+        "originalPrice": 16000,
+        "discountRate": "62%",
+        "discountedPrice": 6000,
+        "pickupPrice": 5500,
+        "deliveryAvailable": false,
+        "pickupStartTime": "17:30",
+        "pickupEndTime": "19:30",
+        "deliveryTime": null,
+        "stock": 5,
+        "description": "면식당 숭실대점의 시크릿 밀박스로 다가오는 유통 기한의 신선 채소를 활용한 라멘, 마제소바, 샤브쌀국수 세트를 제공합니다. 환경과 맛을 균형있게 고려한 메뉴로, 신선한 재료로 당일 조리되었습니다. 오늘 저녁 한정 수량으로 선보이며, 재고 상황에 따라 다양한 면 요리가 포함될 수 있습니다.",
+        "weight": 520,
+        "storeInfo": {
+            "storeName": "면식당 숭실대점",
+            "latitude": 37.4950904,
+            "longitude": 126.9570505,
+            "phoneNumber": "02-822-3008",
+            "address": "서울특별시 동작구 상도동 504-12",
+            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/건강식1.jpg"
+        },
+        "imageUrls": [
+            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/건강식1.jpg"
+        ]
+    },
+    {
+        "category": "패스트 푸드",
+        "foodType": "식사",
+        "menuName": "스페셜 밀박스",
+        "originalPrice": 14000,
+        "discountRate": "57%",
+        "discountedPrice": 6000,
+        "pickupPrice": 5500,
+        "deliveryAvailable": true,
+        "pickupStartTime": "16:00",
+        "pickupEndTime": "18:00",
+        "deliveryTime": "16:00",
+        "stock": 9,
+        "description": "써브웨이 숭실대점의 스페셜 밀박스로 폐기 임박 야채와 빵을 활용해 건강한 샌드위치를 제공합니다. 학생들이 간편하게 즐길 수 있으면서 음식물 쓰레기를 줄이는 공공적 접근의 메뉴입니다. 당일 준비된 신선한 재료를 사용하며, 재고 상황에 따라 다양한 샌드위치가 포함될 수 있습니다.",
+        "weight": 450,
+        "storeInfo": {
+            "storeName": "써브웨이 숭실대점",
+            "latitude": 37.4953703,
+            "longitude": 126.9554326,
+            "phoneNumber": "02-829-3009",
+            "address": "서울특별시 동작구 상도로63길 12",
+            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/패스트푸드1.jpg"
+        },
+        "imageUrls": [
+            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/패스트푸드1.jpg"
+        ]
+    },
+    {
+        "category": "빵",
+        "foodType": "디저트",
+        "menuName": "시크릿 디저트박스",
+        "originalPrice": 13000,
+        "discountRate": "61%",
+        "discountedPrice": 5000,
+        "pickupPrice": 4500,
+        "deliveryAvailable": false,
+        "pickupStartTime": "18:00",
+        "pickupEndTime": "20:00",
+        "deliveryTime": null,
+        "stock": 6,
+        "description": "뚜레쥬르 상도래미안점의 시크릿 디저트박스로 유통 임박 제품을 마감 세일 형태로 활용하는 사회적 책임을 실천합니다. 베이커리 프랜차이즈의 특별한 디저트 빵을 제공하며, 당일 소진을 목표로 한정 수량 판매합니다. 재고 상황에 따라 다양한 디저트 빵이 포함될 수 있습니다.",
+        "weight": 420,
+        "storeInfo": {
+            "storeName": "뚜레쥬르 상도래미안점",
+            "latitude": 37.4979358,
+            "longitude": 126.9529024,
+            "phoneNumber": "02-822-3010",
+            "address": "서울특별시 동작구 상도1동 래미안아파트 상가동 102호",
+            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/빵2.jpg"
+        },
+        "imageUrls": [
+            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/빵2.jpg"
+        ]
+    },
+    {
+        "category": "양식",
+        "foodType": "식사",
+        "menuName": "스페셜 밀박스",
+        "originalPrice": 25000,
+        "discountRate": "64%",
+        "discountedPrice": 9000,
+        "pickupPrice": 8500,
+        "deliveryAvailable": true,
+        "pickupStartTime": "17:00",
+        "pickupEndTime": "19:00",
+        "deliveryTime": "17:00",
+        "stock": 3,
+        "description": "움프의 스페셜 밀박스로 폐기 임박 재료를 활용한 파스타, 스테이크, 타르타르를 제공하는 비스트로입니다. 환경적 가치를 중시하는 고품격 공간의 특별한 메뉴로, 당일 준비된 신선한 재료를 사용합니다. 오늘 저녁 한정 수량으로 판매되며, 재고 상황에 따라 다양한 양식 메뉴가 포함될 수 있습니다.",
+        "weight": 680,
+        "storeInfo": {
+            "storeName": "움프",
+            "latitude": 37.4980529,
+            "longitude": 126.9525282,
+            "phoneNumber": "02-825-3011",
+            "address": "서울특별시 동작구 상도로 185-7",
+            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/양식1.jpg"
+        },
+        "imageUrls": [
+            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/양식1.jpg"
+        ]
+    },
+    {
+        "category": "디저트",
+        "foodType": "디저트",
+        "menuName": "시크릿 디저트박스",
+        "originalPrice": 11000,
+        "discountRate": "54%",
+        "discountedPrice": 5000,
+        "pickupPrice": 4500,
+        "deliveryAvailable": false,
+        "pickupStartTime": "16:30",
+        "pickupEndTime": "18:30",
+        "deliveryTime": null,
+        "stock": 8,
+        "description": "미학당 2호점의 시크릿 디저트박스로 폐기 임박 식재료를 활용하여 디저트 메뉴를 지속가능하게 제공합니다. 지역 친화적인 환경을 지향하는 카페의 특별한 디저트로, 당일 소진을 목표로 한정 수량 판매합니다. 재고 상황에 따라 다양한 카페 디저트가 포함될 수 있습니다.",
+        "weight": 350,
+        "storeInfo": {
+            "storeName": "미학당 2호점",
+            "latitude": 37.4972283,
+            "longitude": 126.9536819,
+            "phoneNumber": "02-827-3012",
+            "address": "서울특별시 동작구 상도로64길 25",
+            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/디저트2.jpg"
+        },
+        "imageUrls": [
+            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/디저트2.jpg"
+        ]
+    },
+    {
+        "category": "건강식",
+        "foodType": "식사",
+        "menuName": "시크릿 밀박스",
+        "originalPrice": 17000,
+        "discountRate": "58%",
+        "discountedPrice": 7000,
+        "pickupPrice": 6500,
+        "deliveryAvailable": true,
+        "pickupStartTime": "17:30",
+        "pickupEndTime": "19:30",
+        "deliveryTime": "17:30",
+        "stock": 5,
+        "description": "슬로우캘리 숭실대점의 시크릿 밀박스로 폐기 직전의 신선한 해산물과 채소를 활용해 건강한 포케를 제공합니다. 신선도는 유지하면서 음식물 쓰레기를 줄이는 목표 아래, 학생과 지역주민에게 저렴하고 안전한 한 끼를 선사하는 공공익적 브랜드입니다. 재고 상황에 따라 다양한 포케가 포함될 수 있습니다.",
+        "weight": 480,
+        "storeInfo": {
+            "storeName": "슬로우캘리 숭실대점",
+            "latitude": 37.4953194,
+            "longitude": 126.9558406,
+            "phoneNumber": "02-877-7562",
+            "address": "서울특별시 동작구 상도동 490-15",
+            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/건강식2.jpg"
+        },
+        "imageUrls": [
+            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/건강식2.jpg"
+        ]
+    },
+    {
+        "category": "건강식",
+        "foodType": "식사",
+        "menuName": "스페셜 밀박스",
+        "originalPrice": 16000,
+        "discountRate": "56%",
+        "discountedPrice": 7000,
+        "pickupPrice": 6500,
+        "deliveryAvailable": false,
+        "pickupStartTime": "18:00",
+        "pickupEndTime": "20:00",
+        "deliveryTime": null,
+        "stock": 6,
+        "description": "포케올데이 숭실대점의 스페셜 밀박스로 폐기 직전 채소 및 곡물을 활용해 만들어진 포케 및 샐러드 메뉴를 제공합니다. 음식물 쓰레기 줄이기에 기여하는 소셜 벤처로, 건강과 환경을 동시에 챙길 수 있는 선택입니다. 당일 준비된 신선한 재료를 사용하며, 재고 상황에 따라 다양한 포케와 샐러드가 포함될 수 있습니다.",
+        "weight": 450,
+        "storeInfo": {
+            "storeName": "포케올데이 숭실대점",
+            "latitude": 37.4949627,
+            "longitude": 126.9580199,
+            "phoneNumber": "02-857-9981",
+            "address": "서울특별시 동작구 상도로61길 33",
+            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/건강식3.jpg"
+        },
+        "imageUrls": [
+            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/건강식3.jpg"
+        ]
+    },
+    {
+        "category": "건강식",
+        "foodType": "식사",
+        "menuName": "시크릿 밀박스",
+        "originalPrice": 15000,
+        "discountRate": "60%",
+        "discountedPrice": 6000,
+        "pickupPrice": 5500,
+        "deliveryAvailable": true,
+        "pickupStartTime": "16:00",
+        "pickupEndTime": "18:00",
+        "deliveryTime": "16:00",
+        "stock": 7,
+        "description": "고렝 숭실대점의 시크릿 밀박스로 폐기 직전 채소 및 곡물을 활용해 만들어진 포케 및 샐러드 메뉴를 제공합니다. 음식물 쓰레기 줄이기에 기여하는 소셜 벤처로, 건강과 환경을 동시에 챙길 수 있는 선택입니다. 당일 준비된 신선한 재료를 사용하며, 재고 상황에 따라 다양한 건강식 메뉴가 포함될 수 있습니다.",
+        "weight": 420,
+        "storeInfo": {
+            "storeName": "고렝 숭실대점",
+            "latitude": 37.4944746,
+            "longitude": 126.9587354,
+            "phoneNumber": "02-883-3072",
+            "address": "서울특별시 동작구 상도로 201",
+            "mainImageUrl": "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/건강식4.jpg"
+        },
+        "imageUrls": [
+            "https://jokbo-breaker-images.s3.ap-northeast-2.amazonaws.com/menu-images/건강식4.jpg"
         ]
     }
 ]
