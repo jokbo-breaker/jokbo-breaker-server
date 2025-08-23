@@ -195,7 +195,10 @@ router.get('/', authenticateToken, async (req: Request, res: Response): Promise<
 
     // orderType 필터링 (pickup, delivery, 또는 전체)
     const orderType = req.query.orderType as string;
-    const filter: any = { userId: user._id };
+    const filter: any = {
+      userId: user._id,
+      status: { $ne: 'cancelled' } // 취소된 주문 제외
+    };
 
     if (orderType && (orderType === 'pickup' || orderType === 'delivery')) {
       filter.orderType = orderType;
