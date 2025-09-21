@@ -3,6 +3,12 @@ import { Order } from '../models/Order';
 import { Menu } from '../models/Menu';
 import { Store } from '../models/Store';
 import { haversineDistanceKm } from './geo';
+import { getLocalRecommendationScores } from './localScoring';
+import {
+  generateCacheKey,
+  getCachedRecommendations,
+  setCachedRecommendations
+} from './recommendationCache';
 
 // OpenAI 클라이언트 초기화
 const openai = new OpenAI({
@@ -165,7 +171,72 @@ export async function analyzeUserPreferences(userId: string): Promise<UserPrefer
 }
 
 /**
- * ChatGPT를 사용하여 메뉴 추천 점수를 계산합니다.
+ * 스마트 추천 시스템 - 캐싱과 로컬 스코어링을 우선 사용, 필요시에만 AI 호출
+ */
+export async function getSmartRecommendationScores(
+  menus: any[],
+  userPreference: UserPreference,
+  request: AIRecommendRequest,
+  useAI: boolean = false // AI 사용 여부를 명시적으로 제어
+): Promise<{ [menuId: string]: { score: number; reason: string } }> {
+  // 1. 캐시 확인
+  const cacheKey = generateCacheKey(
+    'system', // 일반적인 추천이므로 시스템 키 사용
+    request.categories,
+    request.maxPrice,
+    request.deliveryMethod,
+    request.lat,
+    request.lng
+  );
+
+  const cachedResult = getCachedRecommendations(cacheKey);
+  if (cachedResult) {
+    console.log('캐시에서 추천 결과 반환');
+    return cachedResult;
+  }
+
+  // 2. 로컬 스코어링 우선 사용
+  const localScores = getLocalRecommendationScores(menus, userPreference, request);
+
+  // 3. AI 사용이 명시적으로 요청된 경우에만 AI 호출
+  if (useAI && process.env.OPENAI_API_KEY) {
+    try {
+      const aiScores = await getAIRecommendationScores(menus, userPreference, request);
+
+      // AI와 로컬 점수를 조합 (가중평균: 로컬 70%, AI 30%)
+      const hybridScores: { [menuId: string]: { score: number; reason: string } } = {};
+
+      Object.keys(localScores).forEach(menuId => {
+        const localScore = localScores[menuId];
+        const aiScore = aiScores[menuId];
+
+        if (aiScore) {
+          const combinedScore = Math.round(localScore.score * 0.7 + aiScore.score * 0.3);
+          hybridScores[menuId] = {
+            score: combinedScore,
+            reason: `${localScore.reason} + AI 분석`
+          };
+        } else {
+          hybridScores[menuId] = localScore;
+        }
+      });
+
+      // 결과 캐싱 (AI 사용 시 더 긴 캐시)
+      setCachedRecommendations(cacheKey, hybridScores, 7200); // 2시간
+      return hybridScores;
+
+    } catch (error) {
+      console.error('AI 추천 실패, 로컬 스코어링 사용:', error);
+    }
+  }
+
+  // 4. 로컬 스코어링 결과 캐싱 및 반환
+  setCachedRecommendations(cacheKey, localScores, 3600); // 1시간
+  return localScores;
+}
+
+/**
+ * 기존 ChatGPT 기반 추천 (필요시에만 사용)
  */
 export async function getAIRecommendationScores(
   menus: any[],

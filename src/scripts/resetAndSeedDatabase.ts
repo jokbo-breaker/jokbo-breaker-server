@@ -53,8 +53,8 @@ async function resetAndSeedDatabase() {
 
     console.log('✅ 기존 데이터 삭제 완료');
 
-    // 메뉴 데이터 읽기
-    const menuDataPath = path.join(__dirname, '../data/menuData.json');
+    // 메뉴 데이터 읽기 (절대 경로 사용)
+    const menuDataPath = path.join(process.cwd(), 'src/data/menuData.json');
     const menuDataArray: MenuData[] = JSON.parse(fs.readFileSync(menuDataPath, 'utf8'));
 
     console.log(`📄 총 ${menuDataArray.length}개의 메뉴 데이터 로드됨`);
